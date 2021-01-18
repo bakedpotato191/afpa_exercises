@@ -10,7 +10,7 @@ while((nombre < 1) || (nombre >  99))
 //on appelle le fonction premier et on lui passe le parametre nombre
 premier(nombre);
 
-
+//
 //function pour déterminer si un nombre est premier ou pas
 function premier(x)
 {
