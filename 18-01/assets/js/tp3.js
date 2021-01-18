@@ -6,10 +6,10 @@ let supprElement = semaine.pop();
 // on affiche tout les elements
 document.write(semaine.join(', '));
 
-// on ajoute Dimance à la fin du tableau
+// on ajoute Dimanche à la fin du tableau
 let ajtElement = semaine.push('Dimanche')
 
-// on remplace Mar par Mardi
+// on determine l'index de Mar et le remplace par Mardi
 
 let pos = semaine.indexOf('Mar');
 semaine [pos] = 'Mardi';
@@ -17,7 +17,7 @@ semaine [pos] = 'Mardi';
 //on affiche le nombre de valeur du tableau
 document.write("<br>" + "Nombre de valuer du tableau = " + semaine.length);
 
-//on affiche le 5-eme valeur
-document.write("<br>" + "Le 5-eme valuer = " + semaine[4]);
+//on affiche le 5-ème valeur
+document.write("<br>" + "Le 5-ème valuer = " + semaine[4]);
 
 document.write("<br>" + semaine.join(', '));
