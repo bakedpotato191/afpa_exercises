@@ -1,13 +1,13 @@
 while (!(isNumber(x))) {
-  var x = prompt("Donner un x");
+  var x = parseInt(prompt("Donnez un x"));
 }
 
 while (!(isNumber(y))) {
-  var y = prompt("Donner un y");
+  var y = parseInt(prompt("Donnez un y"));
 }
 
 while (!(operation == 'addition' || operation == 'division' || operation == 'soustraction' || operation == 'multiplication' || operation == 'modulo')) {
-  var operation = prompt("Addition, Division, Multiplication, Soustraction, Modulo\n\t\t\tChoisissez un operation").toLowerCase();
+  var operation = prompt("Addition, Division, Multiplication, Soustraction, Modulo\n\n\t\t\tChoisissez une opération").toLowerCase();
 }
 
 switch (operation) {
