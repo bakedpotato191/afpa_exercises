@@ -1,22 +1,39 @@
-var operation = '';
+var operation;
 var x, y;
 
 function setValue(valeur) {
   operation = valeur;
-  document.getElementById("opList").value = valeur;
-  console.log(valeur);
+  if (!(operation == "" || isNaN(operation))) {
+    document.getElementById("opList").value = operation;
+  } else {
+    return;
+  }
 }
 
 function updateInput1(valeur) {
-  x = valeur;
-  document.getElementsByClassName("input1").value = valeur;
-  console.log(valeur);
+  if (!(valeur == '' || isNaN(valeur))) {
+    x = valeur;
+    document.getElementsByClassName("input1").value = valeur;
+  } else {
+    return;
+  }
 }
 
 function updateInput2(valeur) {
-  y = valeur;
-  document.getElementsByClassName("input2").value = valeur;
-  console.log(valeur);
+  if (!(valeur == '' || isNaN(valeur))) {
+    y = valeur;
+    document.getElementsByClassName("input2").value = valeur;
+  } else {
+    return;
+  }
+}
+
+function verify() {
+  if (!(x == '' || isNaN(x) || y == '' || isNaN(y))) {
+    getResult();
+  } else {
+    return;
+  }
 }
 
 function getResult() {
