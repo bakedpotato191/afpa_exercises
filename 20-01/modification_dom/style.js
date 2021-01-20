@@ -11,24 +11,26 @@ function setValue(valeur) {
 }
 
 function updateInput1(valeur) {
-  if (!(valeur == '' || isNaN(valeur))) {
+  if (isNumber(valeur)) {
     x = valeur;
-    document.getElementsByClassName("input1").value = valeur;
+    document.getElementsByClassName("input1").value = x;
   } else {
     return;
   }
 }
 
 function updateInput2(valeur) {
-  if (!(valeur == '' || isNaN(valeur))) {
+  if (isNumber(valeur)) {
     y = valeur;
-    document.getElementsByClassName("input2").value = valeur;
+    document.getElementsByClassName("input2").value = y;
   } else {
     return;
   }
 }
 
 function verify() {
+  x = document.getElementsByClassName("input1").value;
+  y = document.getElementsByClassName("input2").value;
   if (!(x == '' || isNaN(x) || y == '' || isNaN(y))) {
     getResult();
   } else {
@@ -58,4 +60,9 @@ function getResult() {
       alert("Choisissez une opération");
       break;
   }
+}
+
+function isNumber(valeur) {
+  var nombrePattern = /^[0-9]+$/; // nombre de 0 à 9
+  return nombrePattern.test(valeur);
 }
