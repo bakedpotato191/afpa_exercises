@@ -1,9 +1,20 @@
 var x, y, operation;
-
-window.addEventListener("load", nom_user());
 document.getElementById("equalsButton").addEventListener("click", getResult, false);
 document.getElementById("hide").addEventListener("click", hideCalc, false);
 document.getElementById("show").addEventListener("click", showCalc, false);
+
+document.addEventListener('DOMContentLoaded', event => {
+  if (localStorage.getItem('title') === null) {
+    var age = prompt('Saisir le nom');
+    while (age == '') {
+      var age = prompt('Saisir le nom');
+    }
+    localStorage.setItem('title', age);
+    document.title = age;
+  } else {
+    document.title = localStorage.getItem('title');
+  }
+});
 
 [document.querySelector('#x'), document.querySelector('#y'), document.querySelector('#operation'), document.querySelector('#reponse'), document.querySelector('#equalsButton')].forEach(item => {
   item.addEventListener('mouseover', event => {
@@ -53,14 +64,6 @@ document.getElementById("show").addEventListener("click", showCalc, false);
     return false;
   })
 });
-
-function nom_user() {
-  var age = prompt('Saisir le nom');
-  while (age == '') {
-    var age = prompt('Saisir le nom');
-  }
-  document.title = age;
-}
 
 function hideCalc() {
   if (document.getElementsByClassName('container')[0].style.display = 'flex') {
