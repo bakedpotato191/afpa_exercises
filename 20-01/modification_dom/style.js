@@ -29,8 +29,8 @@ function updateInput2(valeur) {
 }
 
 function verify() {
-  x = document.getElementsByClassName("input1").value;
-  y = document.getElementsByClassName("input2").value;
+  let x = document.getElementsByClassName("input1").value;
+  let y = document.getElementsByClassName("input2").value;
   if (!(x == '' || isNaN(x) || y == '' || isNaN(y))) {
     getResult();
   } else {
@@ -40,19 +40,19 @@ function verify() {
 
 function getResult() {
   switch (operation) {
-    case 'addition':
+    case '+':
       var result = parseInt(x) + parseInt(y);
       document.getElementById('result').value = result;
       break;
-    case 'substraction':
+    case '-':
       var result = parseInt(x) - parseInt(y);
       document.getElementById('result').value = result;
       break;
-    case 'multiplication':
+    case '*':
       var result = parseInt(x) * parseInt(y);
       document.getElementById('result').value = result;
       break;
-    case 'division':
+    case '/':
       var result = parseInt(x) / parseInt(y);
       document.getElementById('result').value = result;
       break;

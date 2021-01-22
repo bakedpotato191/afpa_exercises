@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="style.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container-options">
+    <p><a onClick="displayCalc(); return false;" href="index.html">Faire apparaitre la calculatrice</a> / <a onClick="hideCalc(); return false;" href="index.html">Faire disparaitre la calculatrice</a></p>
+  </div>
+
+  <div class="container-calc">
+
+    <div class="input1">
+      <input type="text" id="value1" value="" oninput="updateInput1(this.value)" autocomplete="off" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()">
+    </div>
+
+    <div class='dropdown'>
+      <select id="opList" onChange="setValue(this.value)" value="addition" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()" autocomplete="off">
+        <option selected="selected">Operation</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+      </select>
+    </div>
+
+    <div class="input2">
+      <input type="text" id="value2" value="" oninput="updateInput2(this.value)" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()" autocomplete="off">
+    </div>
+
+    <div class="resultat">
+      <button type="button" name="button" onclick="verify()">=</button>
+    </div>
+    <div class="reponse">
+      <input id="result" type="text" name="" value="" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()" autocomplete="off">
+    </div>
+
+  </div>
+
+<div id="container-message">
+
+</div>
+</body>
+
+</html>
