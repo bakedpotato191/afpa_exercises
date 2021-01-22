@@ -1,52 +1,50 @@
-var operation;
-var x, y;
+var x, y, operation;
 document.getElementById("x").addEventListener("keypress", isNumber, false);
 document.getElementById("y").addEventListener("keypress", isNumber, false);
+document.getElementById("equalsButton").addEventListener("onclick", getResult, false);
 
-function verify() {
-  x = document.getElementById("x").value;
-  y = document.getElementById("y").value;
-  operation = document.getElementById("operation").value;
-  var error = 0;
-
+function verify(x, y, operation) {
+  var err = 0;
   if (x == '' || isNaN(x)) {
     document.querySelector('ul').innerHTML += "<li> saisir x </li>"
-    error++;
+    err++;
   }
   if (y == '' || isNaN(y)) {
     document.querySelector('ul').innerHTML += "<li> saisir y </li>"
-    error++;
+    err++;
   }
   if (operation == "Operation") {
     document.querySelector('ul').innerHTML += "<li> choisir operation </li>"
-    error++;
+    err++;
   }
-
-  if (error > 0) {
+  if (err > 0) {
     return false;
   }
   return true;
 }
 
-function getResult() {
+function getResult(evt) {
+  x = document.getElementById("x").value;
+  y = document.getElementById("y").value;
+  operation = document.getElementById("operation").value;
   document.querySelector('ul').innerHTML = " ";
-  if (verify()) {
+  if (verify(x, y, operation)) {
     switch (operation) {
       case '+':
         var result = parseFloat(x) + parseFloat(y);
-        document.getElementById('result').value = result;
+        document.getElementById('reponse').value = result;
         break;
       case '-':
         var result = parseFloat(x) - parseFloat(y);
-        document.getElementById('result').value = result;
+        document.getElementById('reponse').value = result;
         break;
       case '*':
         var result = parseFloat(x) * parseFloat(y);
-        document.getElementById('result').value = result;
+        document.getElementById('reponse').value = result;
         break;
       case '/':
         var result = parseFloat(x) / parseFloat(y);
-        document.getElementById('result').value = result;
+        document.getElementById('reponse').value = result;
         break;
       default:
         console.log("fail");
