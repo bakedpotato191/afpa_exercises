@@ -1,0 +1,46 @@
+.container{
+  height: 500px;
+}
+
+.container, .container-mainimage, .container-images{
+  display: flex;
+}
+
+.container-gallery{
+  padding: 0px;
+  margin: 0px;
+}
+
+.container-mainimage, .container-gallery{
+  width: 50%;
+}
+
+.container-images{
+  padding-left: 20px;
+}
+
+
+img{
+  height: 120px;
+  width: 115px;
+  margin: 0px 5px 5px 0px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.fullscreen{
+  height: 100%;
+  width: 100%;
+}
