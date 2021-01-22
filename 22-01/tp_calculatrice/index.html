@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
   <meta charset="utf-8">
-  <title></title>
-  <script src="style.js"></script>
+  <title>22-01</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container-options">
-    <p><a onClick="displayCalc(); return false;" href="index.html">Faire apparaitre la calculatrice</a> / <a onClick="hideCalc(); return false;" href="index.html">Faire disparaitre la calculatrice</a></p>
+  <div class="options">
+    <p><a id="hide" href="#">Faire apparaitre la calculatrice</a> / <a id="show" href="#">Faire disparaitre la calculatrice</a></p>
   </div>
-
-  <div class="container-calc">
+  <div class="container">
 
     <div class="input1">
-      <input type="text" id="value1" value="" oninput="updateInput1(this.value)" autocomplete="off" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()">
+      <input id="x" type="text" name="value1" value="" autocomplete="off">
     </div>
 
     <div class='dropdown'>
-      <select id="opList" onChange="setValue(this.value)" value="addition" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()" autocomplete="off">
+      <select id="operation" value="" autocomplete="off">
         <option selected="selected">Operation</option>
         <option value="+">+</option>
         <option value="-">-</option>
@@ -31,21 +28,25 @@
     </div>
 
     <div class="input2">
-      <input type="text" id="value2" value="" oninput="updateInput2(this.value)" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()" autocomplete="off">
+      <input id="y" type="text" name="value2" value="" autocomplete="off">
     </div>
 
-    <div class="resultat">
-      <button type="button" name="button" onclick="verify()">=</button>
+    <div class="button-container">
+      <button id="equalsButton" type="button" name="button">=</button>
     </div>
-    <div class="reponse">
-      <input id="result" type="text" name="" value="" onmouseover="displayMessage(this.id)" onmouseout="hideMessage()" autocomplete="off">
+    <div class="result">
+      <input id="reponse" type="text" name="" value="" autocomplete="off">
     </div>
+  </div>
+  <div id="container-message">
 
   </div>
+  <div id="errors">
+    <ul>
 
-<div id="container-message">
+    </ul>
+  </div>
 
-</div>
 </body>
-
+<script src="style.js"></script>
 </html>

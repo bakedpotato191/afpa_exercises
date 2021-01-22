@@ -1,4 +1,4 @@
-.container-calc, .container-options {
+.container, .options {
   display: flex;
   justify-content: center;
 }
@@ -9,9 +9,22 @@
   width: 600px;
   background-color: yellow;
   border: 1px solid black;
-  display: none;
+  visibility: hidden;
 }
 
 #message {
   margin: 0px;
+}
+
+.errors{
+  align-content: center;
+  color: red;
+}
+
+#x, #y, #reponse, #operation, #errors{
+  text-align: center;
+}
+
+#errors{
+  color: red;
 }
