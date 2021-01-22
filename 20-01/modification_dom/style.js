@@ -1,7 +1,7 @@
 var x, y, operation;
 document.getElementById("x").addEventListener("keypress", isNumber, false);
 document.getElementById("y").addEventListener("keypress", isNumber, false);
-document.getElementById("equalsButton").addEventListener("onclick", getResult, false);
+document.getElementById("equalsButton").addEventListener("click", getResult);
 
 function verify(x, y, operation) {
   var err = 0;
