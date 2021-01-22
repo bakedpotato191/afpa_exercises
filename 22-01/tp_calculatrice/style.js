@@ -10,10 +10,8 @@ document.addEventListener('DOMContentLoaded', event => {
       var age = prompt('Saisir le nom');
     }
     localStorage.setItem('title', age);
-    document.title = age;
-  } else {
-    document.title = localStorage.getItem('title');
   }
+  document.title = localStorage.getItem('title');
 });
 
 [document.querySelector('#x'), document.querySelector('#y'), document.querySelector('#operation'), document.querySelector('#reponse'), document.querySelector('#equalsButton')].forEach(item => {
