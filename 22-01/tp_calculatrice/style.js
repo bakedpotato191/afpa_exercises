@@ -50,12 +50,9 @@ document.addEventListener('DOMContentLoaded', event => {
 
 [document.querySelector('#x'), document.querySelector('#y')].forEach(item => {
   item.addEventListener("keypress", event => {
-
-    var key = String.fromCharCode(event.keyCode);
-    console.log(event.cancelable);
+    var key = event.key;
     var nombrePattern = /^[0-9.]+$/; // nombre de 0 à 9
     if (nombrePattern.test(key)) {
-      console.log("true");
       return true;
     }
     event.preventDefault();
