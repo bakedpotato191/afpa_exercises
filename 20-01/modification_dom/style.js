@@ -46,6 +46,10 @@ function getResult(evt) {
         var result = parseFloat(x) / parseFloat(y);
         document.getElementById('reponse').value = result;
         break;
+      case '%':
+        var result = parseFloat(x) % parseFloat(y);
+        document.getElementById('reponse').value = result;
+        break;
       default:
         console.log("fail");
         break;
