@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <title>20-01</title>
-  <script src="style.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,11 +12,11 @@
   <div class="container">
 
     <div class="input1">
-      <input type="text" name="value1" value="" oninput="updateInput1(this.value)" autocomplete="off">
+      <input id="x" type="text" name="value1" value="" autocomplete="off">
     </div>
 
     <div class='dropdown'>
-      <select id="opList" onChange="setValue(this.value)" value="addition" autocomplete="off">
+      <select id="operation" value="" autocomplete="off">
         <option selected="selected">Operation</option>
         <option value="+">+</option>
         <option value="-">-</option>
@@ -27,18 +26,23 @@
     </div>
 
     <div class="input2">
-      <input type="text" name="value2" value="" oninput="updateInput2(this.value)" autocomplete="off">
+      <input id="y" type="text" name="value2" value="" autocomplete="off">
     </div>
 
     <div class="resultat">
-      <button type="button" name="button" onclick="verify()">=</button>
+      <button type="button" name="button" onclick="getResult()">=</button>
     </div>
     <div class="reponse">
       <input id="result" type="text" name="" value="" autocomplete="off">
     </div>
 
   </div>
+  <div id="errors">
+    <ul>
+
+    </ul>
+  </div>
 
 </body>
-
+<script src="style.js"></script>
 </html>

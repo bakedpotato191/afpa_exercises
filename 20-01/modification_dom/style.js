@@ -1,68 +1,66 @@
 var operation;
 var x, y;
-
-function setValue(valeur) {
-  operation = valeur;
-  if (!(operation == "" || isNaN(operation))) {
-    document.getElementById("opList").value = operation;
-  } else {
-    return;
-  }
-}
-
-function updateInput1(valeur) {
-  if (isNumber(valeur)) {
-    x = valeur;
-    document.getElementsByClassName("input1").value = x;
-  } else {
-    return;
-  }
-}
-
-function updateInput2(valeur) {
-  if (isNumber(valeur)) {
-    y = valeur;
-    document.getElementsByClassName("input2").value = y;
-  } else {
-    return;
-  }
-}
+document.getElementById("x").addEventListener("keypress", isNumber, false);
+document.getElementById("y").addEventListener("keypress", isNumber, false);
 
 function verify() {
-  let x = document.getElementsByClassName("input1").value;
-  let y = document.getElementsByClassName("input2").value;
-  if (!(x == '' || isNaN(x) || y == '' || isNaN(y))) {
-    getResult();
-  } else {
-    return;
+  x = document.getElementById("x").value;
+  y = document.getElementById("y").value;
+  operation = document.getElementById("operation").value;
+  var error = 0;
+
+  if (x == '' || isNaN(x)) {
+    document.querySelector('ul').innerHTML += "<li> saisir x </li>"
+    error++;
   }
+  if (y == '' || isNaN(y)) {
+    document.querySelector('ul').innerHTML += "<li> saisir y </li>"
+    error++;
+  }
+  if (operation == "Operation") {
+    document.querySelector('ul').innerHTML += "<li> choisir operation </li>"
+    error++;
+  }
+
+  if (error > 0) {
+    return false;
+  }
+  return true;
 }
 
 function getResult() {
-  switch (operation) {
-    case '+':
-      var result = parseInt(x) + parseInt(y);
-      document.getElementById('result').value = result;
-      break;
-    case '-':
-      var result = parseInt(x) - parseInt(y);
-      document.getElementById('result').value = result;
-      break;
-    case '*':
-      var result = parseInt(x) * parseInt(y);
-      document.getElementById('result').value = result;
-      break;
-    case '/':
-      var result = parseInt(x) / parseInt(y);
-      document.getElementById('result').value = result;
-      break;
-    default:
-      alert("Choisissez une opération");
-      break;
+  document.querySelector('ul').innerHTML = " ";
+  if (verify()) {
+    switch (operation) {
+      case '+':
+        var result = parseFloat(x) + parseFloat(y);
+        document.getElementById('result').value = result;
+        break;
+      case '-':
+        var result = parseFloat(x) - parseFloat(y);
+        document.getElementById('result').value = result;
+        break;
+      case '*':
+        var result = parseFloat(x) * parseFloat(y);
+        document.getElementById('result').value = result;
+        break;
+      case '/':
+        var result = parseFloat(x) / parseFloat(y);
+        document.getElementById('result').value = result;
+        break;
+      default:
+        console.log("fail");
+        break;
+    }
   }
 }
 
-function isNumber(valeur) {
-  var nombrePattern = /^[0-9]+$/; // nombre de 0 à 9
-  return nombrePattern.test(valeur);
+function isNumber(evt) {
+  var key = evt.key;
+  var nombrePattern = /^[0-9.]+$/; // nombre de 0 à 9
+  if (nombrePattern.test(key)) {
+    return true;
+  }
+  evt.preventDefault();
+  return false;
 }
