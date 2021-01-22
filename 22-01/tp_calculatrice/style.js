@@ -1,21 +1,58 @@
 var x, y, operation;
 
 window.addEventListener("load", nom_user());
-document.getElementById("x").addEventListener("keypress", isNumber, false);
-document.getElementById("y").addEventListener("keypress", isNumber, false);
 document.getElementById("equalsButton").addEventListener("click", getResult, false);
 document.getElementById("hide").addEventListener("click", hideCalc, false);
 document.getElementById("show").addEventListener("click", showCalc, false);
-document.getElementById("equalsButton").addEventListener("mouseover", displayMessage, false);
-document.getElementById("x").addEventListener("mouseover", displayMessage, false);
-document.getElementById("y").addEventListener("mouseover", displayMessage, false);
-document.getElementById("operation").addEventListener("mouseover", displayMessage, false);
-document.getElementById("reponse").addEventListener("mouseover", displayMessage, false);
-document.getElementById("equalsButton").addEventListener("mouseout", hideMessage, false);
-document.getElementById("x").addEventListener("mouseout", hideMessage, false);
-document.getElementById("y").addEventListener("mouseout", hideMessage, false);
-document.getElementById("operation").addEventListener("mouseout", hideMessage, false);
-document.getElementById("reponse").addEventListener("mouseout", hideMessage, false);
+
+[document.querySelector('#x'), document.querySelector('#y'), document.querySelector('#operation'), document.querySelector('#reponse'), document.querySelector('#equalsButton')].forEach(item => {
+  item.addEventListener('mouseover', event => {
+    switch (item.id) {
+      case 'x':
+        document.getElementById('container-message').innerHTML = '<p id="message">saisir un nombre</p>';
+        document.getElementById('container-message').style.visibility = 'visible';
+        break;
+      case 'operation':
+        document.getElementById('container-message').innerHTML = '<p id="message">selectionner un operateur + - * /</p>';
+        document.getElementById('container-message').style.visibility = 'visible';
+        break;
+      case 'y':
+        document.getElementById('container-message').innerHTML = '<p id="message">saisir un nombre</p>';
+        document.getElementById('container-message').style.visibility = 'visible';
+        break;
+      case 'reponse':
+        document.getElementById('container-message').innerHTML = '<p id="message">le résultat</p>';
+        document.getElementById('container-message').style.visibility = 'visible';
+        break;
+      case 'equalsButton':
+        document.getElementById('container-message').innerHTML = '<p id="message">obtenir le résultat</p>';
+        document.getElementById('container-message').style.visibility = 'visible';
+      default:
+        break;
+    }
+  })
+});
+
+[document.querySelector('#x'), document.querySelector('#y'), document.querySelector('#operation'), document.querySelector('#reponse'), document.querySelector('#equalsButton')].forEach(item => {
+  item.addEventListener("mouseout", event => {
+    document.getElementById('container-message').style.visibility = 'hidden';
+  })
+});
+
+[document.querySelector('#x'), document.querySelector('#y')].forEach(item => {
+  item.addEventListener("keypress", event => {
+
+    var key = String.fromCharCode(event.keyCode);
+    console.log(event.cancelable);
+    var nombrePattern = /^[0-9.]+$/; // nombre de 0 à 9
+    if (nombrePattern.test(key)) {
+      console.log("true");
+      return true;
+    }
+    event.preventDefault();
+    return false;
+  })
+});
 
 function nom_user() {
   var age = prompt('Saisir le nom');
@@ -37,36 +74,6 @@ function showCalc() {
     document.getElementsByClassName('container')[0].style.display = 'flex';
   }
   return;
-}
-
-function displayMessage() {
-  switch (this.id) {
-    case 'x':
-      document.getElementById('container-message').innerHTML = '<p id="message">saisir un nombre</p>';
-      document.getElementById('container-message').style.visibility = 'visible';
-      break;
-    case 'operation':
-      document.getElementById('container-message').innerHTML = '<p id="message">selectionner un operateur + - * /</p>';
-      document.getElementById('container-message').style.visibility = 'visible';
-      break;
-    case 'y':
-      document.getElementById('container-message').innerHTML = '<p id="message">saisir un nombre</p>';
-      document.getElementById('container-message').style.visibility = 'visible';
-      break;
-    case 'reponse':
-      document.getElementById('container-message').innerHTML = '<p id="message">le résultat</p>';
-      document.getElementById('container-message').style.visibility = 'visible';
-      break;
-    case 'equalsButton':
-      document.getElementById('container-message').innerHTML = '<p id="message">obtenir le résultat</p>';
-      document.getElementById('container-message').style.visibility = 'visible';
-    default:
-      break;
-  }
-}
-
-function hideMessage() {
-  document.getElementById('container-message').style.visibility = 'hidden';
 }
 
 function verify() {
@@ -121,14 +128,4 @@ function getResult(evt) {
         break;
     }
   }
-}
-
-function isNumber(evt) {
-  var key = evt.key;
-  var nombrePattern = /^[0-9.]+$/; // nombre de 0 à 9
-  if (nombrePattern.test(key)) {
-    return true;
-  }
-  evt.preventDefault();
-  return false;
 }
