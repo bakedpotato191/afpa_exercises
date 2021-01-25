@@ -1,10 +1,8 @@
-var x, y, operation;
+var x, y, operation, age;
 
-document.getElementById("equalsButton").addEventListener("click", getResult, false);
 document.addEventListener('DOMContentLoaded', event => {
   if (localStorage.getItem('title') === null) {
-    var age = prompt('Entrez votre nom');
-    while (age == '') {
+    while ((age = prompt('Entrez votre nom')) === '') {
       var age = prompt('Entrez votre nom');
     }
     localStorage.setItem('title', "Bonjour, " + age + "!");
@@ -35,6 +33,7 @@ document.addEventListener('DOMContentLoaded', event => {
         document.getElementById('container-message').innerHTML = '<p id="message">obtenir le résultat</p>';
         document.getElementById('container-message').style.visibility = 'visible';
       default:
+        event.preventDefault();
         break;
     }
   })
@@ -55,12 +54,12 @@ document.addEventListener('DOMContentLoaded', event => {
     }
     event.preventDefault();
     return false;
-  })
+  }, false)
 });
 
 [document.getElementById('show'), document.getElementById('hide')].forEach(item => {
   item.addEventListener("click", event => {
-    switch (event.target.id) {
+    switch (item.id) {
       case 'hide':
         document.getElementsByClassName('container')[0].style.display = 'none';
         break;
@@ -94,7 +93,7 @@ function verify() {
   return true;
 }
 
-function getResult(evt) {
+document.getElementById("equalsButton").addEventListener("click", event => {
   x = document.getElementById("x").value;
   y = document.getElementById("y").value;
   operation = document.getElementById("operation").value;
@@ -122,8 +121,8 @@ function getResult(evt) {
         document.getElementById('reponse').value = result;
         break;
       default:
-        console.log("fail");
+        event.preventDefault();
         break;
     }
   }
-}
+}, false);
