@@ -3,7 +3,7 @@ var x, y, operation, age;
 document.addEventListener('DOMContentLoaded', event => {
   if (localStorage.getItem('title') === null) {
     while ((age = prompt('Entrez votre nom')) === '') {
-      var age = prompt('Entrez votre nom');
+      continue;
     }
     localStorage.setItem('title', "Bonjour, " + age + "!");
   }
