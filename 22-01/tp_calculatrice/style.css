@@ -12,6 +12,10 @@
   visibility: hidden;
 }
 
+.dropdown, .button-container{
+  margin: 0px 5px 0px 5px;
+}
+
 #message {
   margin: 0px;
 }

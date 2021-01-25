@@ -1,15 +1,13 @@
 var x, y, operation;
-document.getElementById("equalsButton").addEventListener("click", getResult, false);
-document.getElementById("hide").addEventListener("click", hideCalc, false);
-document.getElementById("show").addEventListener("click", showCalc, false);
 
+document.getElementById("equalsButton").addEventListener("click", getResult, false);
 document.addEventListener('DOMContentLoaded', event => {
   if (localStorage.getItem('title') === null) {
-    var age = prompt('Saisir le nom');
+    var age = prompt('Entrez votre nom');
     while (age == '') {
-      var age = prompt('Saisir le nom');
+      var age = prompt('Entrez votre nom');
     }
-    localStorage.setItem('title', age);
+    localStorage.setItem('title', "Bonjour, " + age + "!");
   }
   document.title = localStorage.getItem('title');
 });
@@ -18,15 +16,15 @@ document.addEventListener('DOMContentLoaded', event => {
   item.addEventListener('mouseover', event => {
     switch (item.id) {
       case 'x':
-        document.getElementById('container-message').innerHTML = '<p id="message">saisir un nombre</p>';
+        document.getElementById('container-message').innerHTML = '<p id="message">première nombre</p>';
         document.getElementById('container-message').style.visibility = 'visible';
         break;
       case 'operation':
-        document.getElementById('container-message').innerHTML = '<p id="message">selectionner un operateur + - * /</p>';
+        document.getElementById('container-message').innerHTML = '<p id="message">selectionnez un operateur + - * /</p>';
         document.getElementById('container-message').style.visibility = 'visible';
         break;
       case 'y':
-        document.getElementById('container-message').innerHTML = '<p id="message">saisir un nombre</p>';
+        document.getElementById('container-message').innerHTML = '<p id="message">deuxième nombre</p>';
         document.getElementById('container-message').style.visibility = 'visible';
         break;
       case 'reponse':
@@ -60,32 +58,34 @@ document.addEventListener('DOMContentLoaded', event => {
   })
 });
 
-function hideCalc() {
-  if (document.getElementsByClassName('container')[0].style.display = 'flex') {
-    document.getElementsByClassName('container')[0].style.display = 'none';
-  }
-  return;
-}
-
-function showCalc() {
-  if (document.getElementsByClassName('container')[0].style.display = 'none') {
-    document.getElementsByClassName('container')[0].style.display = 'flex';
-  }
-  return;
-}
+[document.getElementById('show'), document.getElementById('hide')].forEach(item => {
+  item.addEventListener("click", event => {
+    switch (event.target.id) {
+      case 'hide':
+        document.getElementsByClassName('container')[0].style.display = 'none';
+        break;
+      case 'show':
+        document.getElementsByClassName('container')[0].style.display = 'flex';
+        break;
+      default:
+        event.preventDefault();
+        break;
+    }
+  }, false)
+});
 
 function verify() {
   var err = 0;
   if (x == '' || isNaN(x)) {
-    document.querySelector('ul').innerHTML += "<li> saisir x </li>"
+    document.querySelector('ul').innerHTML += "<li> entrez un x </li>"
     err++;
   }
   if (y == '' || isNaN(y)) {
-    document.querySelector('ul').innerHTML += "<li> saisir y </li>"
+    document.querySelector('ul').innerHTML += "<li> entrez un y </li>"
     err++;
   }
   if (operation == "Operation") {
-    document.querySelector('ul').innerHTML += "<li> choisir operation </li>"
+    document.querySelector('ul').innerHTML += "<li> choisissez une opération </li>"
     err++;
   }
   if (err > 0) {
