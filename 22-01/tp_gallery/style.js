@@ -1,8 +1,8 @@
 document.querySelectorAll('.miniature').forEach(element => {
   element.addEventListener('click', event => {
-    var miniatures = document.getElementsByClassName('miniature');
     document.querySelector('.container-mainimage').innerHTML = "<img class='fullscreen' src='" + element.src + "' alt='avengers'>";
     document.querySelector('.container-mainimage').style.border = "8px solid black";
+    let miniatures = document.getElementsByClassName('miniature');
     for (var i = 0; i < miniatures.length; i++) {
       if (element.src == miniatures[i].src) {
         miniatures[i].style.border = "4px solid red";
@@ -10,5 +10,5 @@ document.querySelectorAll('.miniature').forEach(element => {
         miniatures[i].style.border = "4px solid black";
       }
     }
-  })
+  }, false)
 });

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', event => {
     localStorage.setItem('title', "Bonjour, " + age + "!");
   }
   document.title = localStorage.getItem('title');
-});
+}, true);
 
 [document.querySelector('#x'), document.querySelector('#y'), document.querySelector('#operation'), document.querySelector('#reponse'), document.querySelector('#equalsButton')].forEach(item => {
   item.addEventListener('mouseover', event => {
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', event => {
         event.preventDefault();
         break;
     }
-  })
+  }, false)
 });
 
 [document.querySelector('#x'), document.querySelector('#y'), document.querySelector('#operation'), document.querySelector('#reponse'), document.querySelector('#equalsButton')].forEach(item => {
