@@ -124,5 +124,8 @@ document.getElementById("equalsButton").addEventListener("click", event => {
         event.preventDefault();
         break;
     }
+  } else {
+    event.preventDefault();
+    return false;
   }
 }, false);
