@@ -17,6 +17,7 @@
 
 .container-mainimage, .container-gallery{
   width: 50%;
+  height: 100%;
 }
 
 .container-images{
@@ -45,6 +46,6 @@
 }
 
 .fullscreen{
-  height: 100%;
-  width: 100%;
+  height: 97%;
+  width: 97%;
 }
