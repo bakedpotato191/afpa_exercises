@@ -1,73 +1,79 @@
-var rows, columnds, i, j, index;
+var i, j, index, thlen;
 
 document.querySelector('.addrow').addEventListener("click", event => {
-  var a = document.querySelector('.main').cells;
+  //create new row and append it to the tbody selector
   var nouvel_tr = document.createElement('tr');
-  nouvel_tr.className = 'etudiants'
+  nouvel_tr.className = 'etudiants';
   document.querySelector('tbody').append(nouvel_tr);
-
-  for (index = 0; index < a.length; index++) {
-    var contenu_tr = document.createElement('td');
-    var contenu_td = document.createElement('input')
-    contenu_tr.appendChild(contenu_td);
-    nouvel_tr.appendChild(contenu_tr);
+  //get quantity of columns in thead
+  thlen = document.querySelectorAll('[scope="col"]').length;
+  for (index = 0; index < thlen; index++) {
+    //append new th to the first column in the row
+    if (index == 0) {
+      var nouvel_th = document.createElement('th');
+      nouvel_th.scope = 'row';
+      row_nombre = document.querySelectorAll('.etudiants').length;
+      nouvel_th.innerHTML = row_nombre;
+      nouvel_tr.append(nouvel_th);
+    }
+    //if not first column add input forms to every cell
+    else {
+      var contenu_tr = document.createElement('td');
+      var contenu_td = document.createElement('input')
+      contenu_tr.appendChild(contenu_td);
+      nouvel_tr.appendChild(contenu_tr);
+    }
   }
 });
 
 document.querySelector('.admis').addEventListener("click", event => {
-  if (existsRow()) {
-    for (i = 0; i < rows.length; i++) {
-      if (rows[i].children[2].children[0].value > 15) {
-        var admis = document.createElement('div');
-        var admis_text = document.createTextNode(rows[i].children[0].children[0].value + " " + rows[i].children[1].children[0].value + " avec " + rows[i].children[2].children[0].value + " de moyenne");
-        admis.appendChild(admis_text);
-        document.getElementById('container').append(admis);
+  var students = document.querySelectorAll('.etudiants');
+  var inputs = document.getElementsByTagName('input');
+  if (existsEtudiants()) {
+    for (i = 0; i < students.length; i++) {
+      var note = students[i].children[3].children[0].value;
+      if (note >= 16) {
+        var admis = document.querySelector('.resultats');
+        admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
       }
-
     }
+    return;
   }
+
 });
 
 document.querySelector('.non-admis').addEventListener("click", event => {
-  if (existsRow()) {
-    for (i = 0; i < rows.length; i++) {
-      if (rows[i].children[2].children[0].value < 15) {
-        console.log('hmm');
-        var nonadmis = document.createElement('div');
-        var nonadmis_text = document.createTextNode(rows[i].children[0].children[0].value + " " + rows[i].children[1].children[0].value + " avec " + rows[i].children[2].children[0].value + " de moyenne");
-        nonadmis.appendChild(nonadmis_text);
-        document.getElementById('container').append(nonadmis);
+  var students = document.querySelectorAll('.etudiants');
+  var inputs = document.getElementsByTagName('input');
+  if (existsEtudiants()) {
+    for (i = 0; i < students.length; i++) {
+      var note = students[i].children[3].children[0].value;
+      if (note < 16) {
+        var admis = document.querySelector('.resultats');
+        admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
       }
     }
+    return;
   }
 });
 
-function existsRow() {
-  columns = document.querySelector('tbody');
-  rows = document.querySelectorAll('.etudiants');
-  if (columns.childElementCount > 1) {
-    if (existsEtudiants()) {
+function existsEtudiants() {
+  var students = document.querySelectorAll('.etudiants');
+  var inputs = document.getElementsByTagName('input');
+  if (students.length > 0) {
+    for (i = 0; i < students.length; i++) {
+      if (students[i].children[3].children[0].value === "") {
+        alert("saisir tous les champs");
+        return false;
+      }
       return true;
     }
   } else {
     var error = document.createElement('div');
-    error.className = 'nonadmis'
+    error.className = 'nonadmis';
     var error_text = document.createTextNode('Pas d’étudiants inscrits pour le moment');
     error.appendChild(error_text);
     document.getElementById('container').append(error);
     return false;
-  }
-}
-
-function existsEtudiants() {
-  for (i = 0; i < rows.length; i++) {
-    for (j = 0; j < rows[i].childElementCount; j++) {
-      if ((rows[i].children[j].children[0].value) == '') {
-        alert("saisir les champs obligatoires");
-        return false;
-      } else {
-        return true;
-      }
-    }
   }
 }

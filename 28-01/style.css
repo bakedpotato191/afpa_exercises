@@ -2,13 +2,35 @@ th, td{
   border: 1px solid black;
 }
 
-table td{
+tbody td{
   width:50%;
+  position: relative;
+}
+
+tbody td input {
+  position: absolute;
+  display: block;
+  top:0;
+  left:0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.25);
+  caret-color: white;
+  color: white;
+  text-align: center;
 }
 
 th{
   height: 60px;
   width: 200px;
+}
+
+.main th, tbody th{
+  text-align: center;
 }
 
 table{
@@ -18,7 +40,12 @@ table{
   margin: auto;
 }
 
-input {
-    width: 100%;
-    box-sizing: border-box;
+.buttons{
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.admis, .non-admis, .addrow{
+  margin-left: 10px;
 }
