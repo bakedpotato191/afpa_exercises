@@ -74,3 +74,8 @@ label{
 .bottom-input{
   display: flex;
 }
+
+#plus, #equals{
+  font-weight: bold;
+  font-size: 30px;
+}
