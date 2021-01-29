@@ -1,5 +1,4 @@
-body {
-  background-color: #9fd9f6!important;
+body {background-color: #9fd9f6!important;
 }
 
 header {
@@ -16,8 +15,8 @@ header p{
 
 .container-p, .container-inputs{
   display: flex;
-  flex-direction: row;            /* default value; can be omitted */
-  flex-wrap: nowrap;              /* default value; can be omitted */
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: space-around;
   border-bottom: 1px solid white;
   padding: 20px 0px 20px 0px;
