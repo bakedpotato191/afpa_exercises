@@ -33,18 +33,16 @@ document.querySelector('.addrow').addEventListener("click", event => {
     admis.innerHTML = "";
     if (existsEtudiants()) {
       if (event.target.value == 'admis') {
-        for (i = 0; i < students.length; i++) {
-          var note = students[i].children[3].children[0].value;
-          if (note >= 16) {
-            admis.innerHTML += "<br>" + students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+        for (i = 2; i < inputs.length; i = i + 3) {
+          if (inputs[i].value >= 16) {
+            admis.innerHTML += "<br>" + inputs[i - 2].value + " " + inputs[i - 1].value + "" + " avec moyenne de " + inputs[i].value;
           }
         }
         return;
       } else if (event.target.value == 'pasadmis') {
-        for (i = 0; i < students.length; i++) {
-          var note = students[i].children[3].children[0].value;
-          if (note < 16) {
-            admis.innerHTML += "<br>" + students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+        for (i = 2; i < inputs.length; i++) {
+          if (inputs[i].value < 16) {
+            admis.innerHTML += "<br>" + inputs[i - 2].value + " " + inputs[i - 1].value + "" + " avec moyenne de " + inputs[i].value;
           }
         }
         return;
