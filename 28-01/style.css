@@ -24,17 +24,11 @@ tbody td input {
   text-align: center;
 }
 
-th{
-  height: 60px;
-  width: 200px;
-}
-
 .main th, tbody th{
   text-align: center;
 }
 
 table{
-  width: 550px;
   table-layout: fixed;
   border-collapse:collapse;
   margin: auto;

@@ -29,22 +29,23 @@ document.querySelector('.addrow').addEventListener("click", event => {
   item.addEventListener('click', event => {
     var students = document.querySelectorAll('.etudiants');
     var inputs = document.getElementsByTagName('input');
+    var admis = document.querySelector('.resultats');
+    admis.innerHTML = "";
     if (existsEtudiants()) {
       if (event.target.value == 'admis') {
         for (i = 0; i < students.length; i++) {
           var note = students[i].children[3].children[0].value;
           if (note >= 16) {
-            var admis = document.querySelector('.resultats');
-            admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+            admis.innerHTML += "<br>" + students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
           }
         }
         return;
       } else if (event.target.value == 'pasadmis') {
         for (i = 0; i < students.length; i++) {
+          console.log(i);
           var note = students[i].children[3].children[0].value;
           if (note < 16) {
-            var admis = document.querySelector('.resultats');
-            admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+            admis.innerHTML += "<br>" + students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
           }
         }
         return;
