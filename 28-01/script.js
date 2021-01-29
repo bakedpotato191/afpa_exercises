@@ -1,5 +1,4 @@
 var i, j, index, thlen;
-
 document.querySelector('.addrow').addEventListener("click", event => {
   //create new row and append it to the tbody selector
   var nouvel_tr = document.createElement('tr');
@@ -26,35 +25,32 @@ document.querySelector('.addrow').addEventListener("click", event => {
   }
 });
 
-document.querySelector('.admis').addEventListener("click", event => {
-  var students = document.querySelectorAll('.etudiants');
-  var inputs = document.getElementsByTagName('input');
-  if (existsEtudiants()) {
-    for (i = 0; i < students.length; i++) {
-      var note = students[i].children[3].children[0].value;
-      if (note >= 16) {
-        var admis = document.querySelector('.resultats');
-        admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+[document.querySelector('.admis'), document.querySelector('.non-admis')].forEach(item => {
+  item.addEventListener('click', event => {
+    var students = document.querySelectorAll('.etudiants');
+    var inputs = document.getElementsByTagName('input');
+    if (existsEtudiants()) {
+      if (event.target.value == 'admis') {
+        for (i = 0; i < students.length; i++) {
+          var note = students[i].children[3].children[0].value;
+          if (note >= 16) {
+            var admis = document.querySelector('.resultats');
+            admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+          }
+        }
+        return;
+      } else if (event.target.value == 'pasadmis') {
+        for (i = 0; i < students.length; i++) {
+          var note = students[i].children[3].children[0].value;
+          if (note < 16) {
+            var admis = document.querySelector('.resultats');
+            admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
+          }
+        }
+        return;
       }
     }
-    return;
-  }
-
-});
-
-document.querySelector('.non-admis').addEventListener("click", event => {
-  var students = document.querySelectorAll('.etudiants');
-  var inputs = document.getElementsByTagName('input');
-  if (existsEtudiants()) {
-    for (i = 0; i < students.length; i++) {
-      var note = students[i].children[3].children[0].value;
-      if (note < 16) {
-        var admis = document.querySelector('.resultats');
-        admis.innerHTML = students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
-      }
-    }
-    return;
-  }
+  })
 });
 
 function existsEtudiants() {
@@ -69,11 +65,8 @@ function existsEtudiants() {
       return true;
     }
   } else {
-    var error = document.createElement('div');
-    error.className = 'nonadmis';
-    var error_text = document.createTextNode('Pas d’étudiants inscrits pour le moment');
-    error.appendChild(error_text);
-    document.getElementById('container').append(error);
+    var error = document.querySelector('.resultats');
+    error.innerHTML = 'Pas d’étudiants inscrits pour le moment';
     return false;
   }
 }
