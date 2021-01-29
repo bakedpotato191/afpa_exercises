@@ -42,7 +42,6 @@ document.querySelector('.addrow').addEventListener("click", event => {
         return;
       } else if (event.target.value == 'pasadmis') {
         for (i = 0; i < students.length; i++) {
-          console.log(i);
           var note = students[i].children[3].children[0].value;
           if (note < 16) {
             admis.innerHTML += "<br>" + students[i].children[1].children[0].value + " " + students[i].children[2].children[0].value + "" + " avec moyenne de " + note;
@@ -55,16 +54,15 @@ document.querySelector('.addrow').addEventListener("click", event => {
 });
 
 function existsEtudiants() {
-  var students = document.querySelectorAll('.etudiants');
   var inputs = document.getElementsByTagName('input');
-  if (students.length > 0) {
-    for (i = 0; i < students.length; i++) {
-      if (students[i].children[3].children[0].value === "") {
+  if (inputs.length > 0) {
+    for (var i = 0; i < inputs.length; i++) {
+      if (inputs[i].value === "") {
         alert("saisir tous les champs");
         return false;
       }
-      return true;
     }
+    return true;
   } else {
     var error = document.querySelector('.resultats');
     error.innerHTML = 'Pas d’étudiants inscrits pour le moment';
