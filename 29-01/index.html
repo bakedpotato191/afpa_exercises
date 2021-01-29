@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercice TVA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <p>Calculer une TVA</p>
+    </header>
+    <div class="container-p">
+      <p class="labels">Montant Hors Taxes</p>
+      <p></p>
+      <p class="labels">Montant TVA</p>
+      <p></p>
+      <p class="labels">Montant TTC</p>
+    </div>
+    <div class="container-inputs">
+      <input class="montant-hors-taxes" type="text" name="" value="">
+      <p>+</p>
+      <input class="montant-tva" type="text" name="" value="">
+      <p>=</p>
+      <input class="montant-ttc" type="text" name="" value="">
+    </div>
+    <div class="container-taux-tva">
+      <p>Taux TVA</p>
+      <input id="input-tva" type="text" name="" value="20%">
+    </div>
+    <div class="buttons">
+      <button class="tva btn btn-dark" type="button" name="button">20%</button>
+      <button class="tva btn btn-dark" type="button" name="button">10%</button>
+      <button class="tva btn btn-dark" type="button" name="button">8.5%</button>
+      <button class="tva btn btn-dark" type="button" name="button">7%</button>
+      <button class="tva btn btn-dark" type="button" name="button">5.5%</button>
+      <button class="tva btn btn-dark" type="button" name="button">19.6%</button>
+    </div>
+    <div class="bottom">
+      <div class="bottom-input"><label>Montant hors taxes:</label> <span class="bottom-hors-taxes"></span></div>
+      <div class="bottom-input"><label>Montant TVA:</label> <span class="bottom-tva"></span></div>
+      <div class="bottom-input"><label>Montant TTC:</label> <span class="bottom-ttc"></span></div>
+    </div>
+  </body>
+  <script src="script.js">
+  </script>
+</html>
