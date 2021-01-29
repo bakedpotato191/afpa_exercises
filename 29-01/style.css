@@ -33,6 +33,9 @@ input{
   margin: 20px 0px 20px 0px;
   width: 200px;
   text-align:center;
+  background-color: #343a40;
+  color: white;
+  caret-color: white;
 }
 
 .container-taux-tva{
