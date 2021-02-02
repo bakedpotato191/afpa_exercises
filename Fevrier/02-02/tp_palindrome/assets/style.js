@@ -7,52 +7,28 @@ $('.btn').click(function() {
     input_table[index] = input[index];
   }
 
-  var reverse_table = [];
-
-  for (index = input.length; index >= 0; index--) {
-    reverse_table[input.length - (index + 1)] = input[index];
-  }
+  var reverse_table = input_table.reverse();
 
   if (compare(input_table, reverse_table)) {
-    $('form').append("<div class='alert alert-primary' role='alert'>" + input + " est un palindrome" + " <div>");
+    if ($('.alert').length === 0) {
+      $('form').append("<div class='alert alert-primary' role='alert'>" + input + " est un palindrome" + " <div>");
+    } else {
+      $('.alert').html(input + " est un palindrome");
+    }
   } else {
-    $('form').append("<div class='alert alert-primary' role='alert'>" + input + " n'est pas un palindrome" + " <div>");
+    if ($('.alert').length === 0) {
+      $('form').append("<div class='alert alert-primary' role='alert'>" + input + " n'est pas un palindrome" + " <div>");
+    } else {
+      $('.alert').html(input + " n'est pas un palindrome");
+    }
   }
 });
 
 function compare(input, reverse) {
   for (var i = 0; i < input.length; i++) {
-    if (input[i] !== reverse[i]) {
+    if (input[i] !== reverse[reverse.length - i - 1]) {
       return false;
     }
   }
   return true;
 }
-
-/* 2-eme variante, sans reverse
-
-$('.btn').click(function() {
-  var input = $('#formGroupExampleInput2').val();
-
-  var input_table = [];
-
-  for (index = 0; index < input.length; index++) {
-    input_table[index] = input[index];
-  }
-  if (compare(input_table)) {
-    $('form').append("<div class='alert alert-primary' role='alert'>" + input + " est un palindrome" + " <div>");
-  } else {
-    $('form').append("<div class='alert alert-primary' role='alert'>" + input + " n'est pas un palindrome" + " <div>");
-  }
-});
-
-function compare(input) {
-  for (var i = 0; i < input.length; i++) {
-    if (input[i] !== input[input.length - i - 1]) {
-      return false;
-    }
-  }
-  return true;
-}
-
-*/
