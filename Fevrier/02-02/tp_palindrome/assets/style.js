@@ -28,3 +28,31 @@ function compare(input, reverse) {
   }
   return true;
 }
+
+/* 2-eme variante, sans reverse
+
+$('.btn').click(function() {
+  var input = $('#formGroupExampleInput2').val();
+
+  var input_table = [];
+
+  for (index = 0; index < input.length; index++) {
+    input_table[index] = input[index];
+  }
+  if (compare(input_table)) {
+    $('form').append("<div class='alert alert-primary' role='alert'>" + input + " est un palindrome" + " <div>");
+  } else {
+    $('form').append("<div class='alert alert-primary' role='alert'>" + input + " n'est pas un palindrome" + " <div>");
+  }
+});
+
+function compare(input) {
+  for (var i = 0; i < input.length; i++) {
+    if (input[i] !== input[input.length - i - 1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+*/
