@@ -1,0 +1,42 @@
+body {
+  margin: 10px 0px 0px 10px;
+}
+
+.row{
+  background: beige;
+  padding: 10px;
+  margin: 5px 0px 0px 5px;
+}
+
+
+
+.resultat .text1{
+  font-weight: bold;
+  font-family:cursive;
+  font-size: 25px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.resultat .text2{
+  font-size: 18px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.resultat{
+  text-align: center;
+  width: 100%;
+}
+
+.nombre{
+  font-size: 30px;
+  color: red;
+  font-weight: bold;
+  display: block;
+}
+
+.type{
+  display: block;
+  font-size: 18px;
+}
