@@ -3,16 +3,14 @@ body {
 }
 
 .row{
-  background: beige;
+  background: #ededed;
   padding: 10px;
-  margin: 5px 0px 0px 5px;
+  margin: 25px 0px 0px 5px;
+  padding: 25px;
 }
-
-
 
 .resultat .text1{
   font-weight: bold;
-  font-family:cursive;
   font-size: 25px;
   display: block;
   margin-bottom: 5px;
@@ -25,18 +23,34 @@ body {
 }
 
 .resultat{
-  text-align: center;
   width: 100%;
 }
 
 .nombre{
-  font-size: 30px;
-  color: red;
+  font-size: 80px;
+  color: #d14a4a;
   font-weight: bold;
+  font-family: sans-serif;
   display: block;
+  text-align: center;
 }
 
 .type{
   display: block;
   font-size: 18px;
+  color: #d14a4a;
+  font-weight: 700;
+}
+
+.container{
+  width: 700px;
+}
+
+.inputGroup-sizing-sm{
+  margin-right: 5px;
+  font-weight:600;
+}
+
+.calcule{
+  margin: 0 auto;
 }
