@@ -22,7 +22,7 @@ $("input[type='submit']").click(function() {
     if ($('.result').length === 0) {
       $('.col').append("<div class='h-100 row align-items-center result'></div>");
       $('.result').append("<div class='resultat'></div>");
-      $('.resultat').append("<span class='text1'>Resultat</span>");
+      $('.resultat').append("<span class='text1'>Résultat</span>");
       $('.resultat').append("<span class='text2'>Votre IMC (indice de masse corporelle) est de:</span>");
       $('.resultat').append("<span class='nombre'>" + imc + "</span>");
       if (imc < 18.5) {

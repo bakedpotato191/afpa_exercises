@@ -47,10 +47,15 @@ body {
 }
 
 .inputGroup-sizing-sm{
-  margin-right: 5px;
   font-weight:600;
 }
 
 .calcule{
   margin: 0 auto;
+  font-weight: bold;
+}
+
+.taille, .poids{
+  border: 0.5px solid grey;
+  margin-left: 10px;
 }
