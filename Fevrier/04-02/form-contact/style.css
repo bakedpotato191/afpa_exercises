@@ -29,3 +29,7 @@ form{
   text-align: center;
   min-height: 100vh;
 }
+
+textarea {
+  resize: none;
+}
