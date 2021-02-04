@@ -99,9 +99,9 @@ $('document').ready(function() {
 
   $("button").on("click", function() {
     if ($('input').not('.info').length == 0 && $('textarea').hasClass('info')) {
-      var nom = $('#inputNom').val();
+      var prenom = $('#inputPrenom').val();
       $('form').css("display", "none");
-      $('.container').append("<div class='success'> Merci " + nom + ", votre message a été bien envoyé!")
+      $('.container').append("<div class='success'> Merci " + prenom + ", votre message a été bien envoyé!")
     } else {
       if ($('.error').length > 0) {
         return;
