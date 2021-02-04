@@ -19,7 +19,7 @@ $('document').ready(function() {
       $(this).addClass('vide');
     }
 
-    $('.mots').html(mots + " Mot(s)" + " / " + caracteres + " Caractère(s)" + " / 200");
+    $('.mots').html(mots + " Mot(s)" + " / " + (limit - caracteres) + " Caractère(s)" + " / 200");
     $('#exampleFormControlTextarea1').attr("maxlength", limit + spaceCount);
 
   });
