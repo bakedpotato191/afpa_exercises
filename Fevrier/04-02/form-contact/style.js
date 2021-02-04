@@ -104,7 +104,7 @@ $('document').ready(function() {
       $('.container').append("<div class='success'> Merci " + nom + ", votre message a été bien envoyé!")
     } else {
       if ($('.error').length > 0) {
-        $('error').html("Saisir tous les valeurs");
+        return;
       } else {
         $('form').append("<div> Remplir tous les champs </div>")
         $('form').children().last().addClass('error');
