@@ -1,5 +1,3 @@
-$('document').ready(function() {
-
   var limit = 200;
 
   $('#inputNom, #inputPrenom').on("keypress", function() {
@@ -110,4 +108,3 @@ $('document').ready(function() {
     element.removeClass('info');
     element.addClass('vide');
   }
-});
