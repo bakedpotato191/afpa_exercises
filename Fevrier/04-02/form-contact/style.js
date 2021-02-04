@@ -12,11 +12,9 @@ $('document').ready(function() {
       }
     }
     if ($(this).val().length > 0) {
-      $(this).removeClass('vide');
-      $(this).addClass('info');
+      setCorrect($(this));
     } else {
-      $(this).removeClass('info');
-      $(this).addClass('vide');
+      setPasCorrect($(this));
     }
 
     $('.mots').html(mots + " Mot(s)" + " / " + (limit - caracteres) + " Caractère(s)" + " / 200");
@@ -35,18 +33,12 @@ $('document').ready(function() {
   });
 
   $('#inputNom, #inputPrenom').on("input", function() {
-    setClass(event.key, $(this));
-  });
-
-  function setClass(key, element) {
-    if (element.val().length > 0) {
-      element.removeClass('vide');
-      element.addClass('info');
+    if ($(this).val().length > 0) {
+      setCorrect($(this));
     } else {
-      element.removeClass('info');
-      element.addClass('vide');
+      setPasCorrect($(this));
     }
-  };
+  });
 
   function regexNomPrenom(key) {
     var regex = /^[a-zA-ZÀ-ÿ-. ]*$/;
@@ -69,11 +61,9 @@ $('document').ready(function() {
   $('#inputEmail4').on("input", function() {
     var regex = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     if (regex.test($(this).val())) {
-      $(this).removeClass('vide');
-      $(this).addClass('info');
+      setCorrect($(this));
     } else {
-      $(this).removeClass('info');
-      $(this).addClass('vide');
+      setPasCorrect($(this));
     }
   });
 
@@ -89,11 +79,9 @@ $('document').ready(function() {
   $('#inputTel').on("input", function() {
     var phoneExp = /^((\+)33|0|0033)[1-9](\d{2}){4}$/g;
     if (phoneExp.test($(this).val())) {
-      $(this).removeClass('vide');
-      $(this).addClass('info');
+      setCorrect($(this));
     } else {
-      $(this).removeClass('info');
-      $(this).addClass('vide');
+      setPasCorrect($(this));
     }
   });
 
@@ -112,4 +100,13 @@ $('document').ready(function() {
     }
   });
 
+  function setCorrect(element) {
+    element.removeClass('vide');
+    element.addClass('info');
+  }
+
+  function setPasCorrect(element) {
+    element.removeClass('info');
+    element.addClass('vide');
+  }
 });
