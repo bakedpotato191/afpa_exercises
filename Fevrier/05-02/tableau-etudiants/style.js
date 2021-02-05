@@ -156,12 +156,9 @@ function setCorrect(element) {
 }
 
 function verifierChamps() {
-  if ($('input').not('.info').length == 0) {
+  if (!($('input').not('.info').length)) {
     return true;
-  } else {
-    return false;
   }
-
 }
 
 function setPasCorrect(element) {
@@ -173,13 +170,11 @@ function setPasCorrect(element) {
 }
 
 function showWarning() {
-  if (!($('form').children('.warning').length)) {
+  if (!($('.button-container').children('.warning').length)) {
     $("<div></div>").addClass("warning").css({
       "color": "red",
       "font-size": "16px",
       "display": "inline-block"
     }).html('Saisir tous les champs').appendTo($('.button-container'));
-  } else {
-    $('.warning').html('Saisir tous les champs');
   }
 }
