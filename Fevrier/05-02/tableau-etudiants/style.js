@@ -1,51 +1,67 @@
 $(function() {
-  $('textarea').css({
-    "resize": "none"
-  });
   $('form').css({
     "margin-top": "50px"
   });
 
   $('.btn-info').prop("disabled", true);
+  inputs = $('input');
+
+  $('thead').find('th').css({
+    "text-align": "center",
+    "vertical-align": "middle"
+  });
 });
 
 $(".btn-primary").on("click", function() {
   if (verifierChamps()) {
     $('<tr></tr>').appendTo('tbody');
-    $('<th></th>').attr("scope", "row").appendTo('tr:last');
+    $('<th></th>').attr("scope", "row").css({
+      "text-align": "center",
+      "vertical-align": "middle"
+    }).html($('tbody').children('tr').length).appendTo('tr:last');
 
-    $('th:last').html($('tbody').children('tr').length);
+    var classes = ['prenom', 'nom', 'email', 'telephone']
+    for (var i = 0; i < classes.length; i++) {
+      $('<td></td>').attr("class", classes[i]).css({
+        "text-align": "center",
+        "vertical-align": "middle"
+      }).html(inputs.eq(i).val()).appendTo('tr:last');
+    }
 
-    $('<td></td>').attr("class", "prenom").html($('#inputPrenom').val()).appendTo('tr:last');
-    $('<td></td>').attr("class", "nom").html($('#inputNom').val()).appendTo('tr:last');
-    $('<td></td>').attr("class", "email").html($('#inputEmail4').val()).appendTo('tr:last');
-    $('<td></td>').attr("class", "telephone").html($('#inputTel').val()).appendTo('tr:last');
+    $('<td></td>').css({
+      "display": "flex",
+      "justify-content": "center",
+    }).appendTo('tr:last');
 
-    $('<td></td>').appendTo('tr:last');
     editNumber = $('.btn-success').length;
+
     $('<button></button>').attr({
       "type": "button",
       "class": "btn btn-success",
       "value": editNumber + 1
+    }).css({
+      "margin-left": "10px"
     }).html('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>').appendTo('td:last');
+
     deleteButton = $('.btn-danger').length;
+
     $('<button></button>').attr({
       "type": "button",
       "class": "btn btn-danger",
       "value": deleteButton + 1
-    }).html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
+    }).css("margin-left", "10px").html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
 
     $('.btn-success').on("click", function() {
       var child = $(this).parent().parent().children();
       var id = $(this).parent().parent().children('th').html();
       for (var index = 1; index < child.length - 1; index++) {
-        $('input').eq(index - 1).val(child[index].textContent);
+        inputs.eq(index - 1).val(child[index].textContent);
       }
       $('.btn-primary').prop("disabled", true);
       $('.btn-info').prop("disabled", false);
       editButton = $(this).val();
-      for (var index = 0; index < $('input').length; index++) {
-        setCorrect($('input').eq(index));
+      for (var index = 0; index < inputs.length; index++) {
+        setCorrect(inputs.eq(index));
       }
     });
 
@@ -68,8 +84,8 @@ $(".btn-primary").on("click", function() {
 
 $('.btn-info').on("click", function() {
   if (verifierChamps()) {
-    for (i = 0; i < $('input').length; i++) {
-      $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html($('input').eq(i).val());
+    for (i = 0; i < inputs.length; i++) {
+      $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html(inputs.eq(i).val());
     }
     $('.btn-primary').prop("disabled", false);
     $(this).prop("disabled", true);
@@ -80,9 +96,9 @@ $('.btn-info').on("click", function() {
 });
 
 function resetInput() {
-  $('input').val('');
-  $('input').removeClass('info');
-  $('input').css("border", "");
+  inputs.val('');
+  inputs.removeClass('info');
+  inputs.css("border", "");
 };
 
 $('#inputNom, #inputPrenom').on("keypress", function() {
@@ -156,7 +172,7 @@ function setCorrect(element) {
 }
 
 function verifierChamps() {
-  if (!($('input').not('.info').length)) {
+  if (!(inputs.not('.info').length)) {
     return true;
   }
 }
