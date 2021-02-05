@@ -44,6 +44,9 @@ $(".btn-primary").on("click", function() {
       $('.btn-primary').prop("disabled", true);
       $('.btn-info').prop("disabled", false);
       editButton = $(this).val();
+      for (var index = 0; index < $('input').length; index++) {
+        setCorrect($('input').eq(index));
+      }
     });
 
     $(".btn-danger").on("click", function() {
