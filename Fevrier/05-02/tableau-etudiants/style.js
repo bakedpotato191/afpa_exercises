@@ -67,13 +67,17 @@ $(".btn-primary").on("click", function() {
       }
     });
 
-    $(".btn-danger").on("click", function() {
+    $(".btn-danger").unbind('click').click(function() {
       if (confirm("Supprimer l'étudiant?")) {
-        var deleteValue = $(this).val();
-        $('tbody').children('tr').eq(deleteValue - 1).remove();
+        $(this).closest('tr').remove();
         if (!($('tbody').children('tr').length)) {
           $('.btn-info').prop("disabled", true);
           $('.btn-primary').prop("disabled", false);
+        }
+        var element_th = $('tbody').find('th');
+        console.log(element_th);
+        for (var i = 0; i < element_th.length; i++) {
+          element_th.eq(i).html(i + 1);
         }
       }
     });
@@ -146,6 +150,12 @@ $('#inputTel').on("input", function() {
     setCorrect($(this));
   } else {
     setPasCorrect($(this));
+  }
+});
+
+$('#inputNom, #inputPrenom,#inputEmail4, #inputTel').on('keyup', function(e) {
+  if (e.key === 'Enter' || e.keyCode === 13) {
+    $('.btn-primary').trigger("click");
   }
 });
 
