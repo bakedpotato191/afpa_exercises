@@ -5,69 +5,68 @@ $(function() {
   $('form').css({
     "margin-top": "50px"
   });
+
+  $('.btn-info').prop("disabled", true);
 });
 
 $(".btn-primary").on("click", function() {
-  /*if ($('input').not('.info').length == 0) {*/
-  $('<tr></tr>').appendTo('tbody');
-  $('<th></th>').attr("scope", "row").appendTo('tr:last');
+  if ($('input').not('.info').length == 0) {
+    $('<tr></tr>').appendTo('tbody');
+    $('<th></th>').attr("scope", "row").appendTo('tr:last');
 
-  $('th:last').html($('tbody').children('tr').length);
+    $('th:last').html($('tbody').children('tr').length);
 
-  $('<td></td>').attr("class", "prenom").html($('#inputPrenom').val()).appendTo('tr:last');
-  $('<td></td>').attr("class", "nom").html($('#inputNom').val()).appendTo('tr:last');
-  $('<td></td>').attr("class", "email").html($('#inputEmail4').val()).appendTo('tr:last');
-  $('<td></td>').attr("class", "telephone").html($('#inputTel').val()).appendTo('tr:last');
+    $('<td></td>').attr("class", "prenom").html($('#inputPrenom').val()).appendTo('tr:last');
+    $('<td></td>').attr("class", "nom").html($('#inputNom').val()).appendTo('tr:last');
+    $('<td></td>').attr("class", "email").html($('#inputEmail4').val()).appendTo('tr:last');
+    $('<td></td>').attr("class", "telephone").html($('#inputTel').val()).appendTo('tr:last');
 
-  $('<td></td>').appendTo('tr:last');
-  $('<button></button>').attr({
-    "type": "button",
-    "class": "btn btn-success"
-  }).html('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>').appendTo('td:last');
+    $('<td></td>').appendTo('tr:last');
+    editNumber = $('.btn-success').length;
+    $('<button></button>').attr({
+      "type": "button",
+      "class": "btn btn-success",
+      "value": editNumber + 1
+    }).html('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>').appendTo('td:last');
+    deleteButton = $('.btn-danger').length;
+    $('<button></button>').attr({
+      "type": "button",
+      "class": "btn btn-danger",
+      "value": deleteButton + 1
+    }).html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
 
-  $('<button></button>').attr({
-    "type": "button",
-    "class": "btn btn-danger"
-  }).html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
-
-
-
-  $('.btn-success').on("click", function() {
-    var child = $(this).parent().parent().children();
-    var id = $(this).parent().parent().children('th').html();
-    for (var index = 1; index < child.length - 1; index++) {
-      $('input').eq(index - 1).val(child[index].textContent);
-    }
-    if (!($('.btn-info').length)) {
-      $('.button-container').append('<button type="button" class="btn btn-info">Sauvegarder</button>')
-    }
-    $('.btn-primary').prop("disabled", true);
-
-    $('.btn-info').on("click", function() {
-      var a = $('tbody').children('tr');
-      for (i = 0; i < $('input').length; i++) {
-        a.eq(id - 1).children('td').eq(i).html($('input').eq(i).val());
+    $('.btn-success').on("click", function() {
+      var child = $(this).parent().parent().children();
+      var id = $(this).parent().parent().children('th').html();
+      for (var index = 1; index < child.length - 1; index++) {
+        $('input').eq(index - 1).val(child[index].textContent);
       }
-      $('.btn-primary').prop("disabled", false);
-      resetInput();
+      $('.btn-primary').prop("disabled", true);
+      $('.btn-info').prop("disabled", false);
+      editButton = $(this).val();
     });
 
+    $(".btn-danger").on("click", function() {
+      $('tbody').children('tr').eq($(this).val() - 1).remove();
+      event.stopPropagation();
+      event.preventDefault();
+    });
 
-  });
-
-  $(".btn-danger").on("click", function() {
-
-    /* ??? */
-
-  });
-
-  $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
-  resetInput();
-  /*} else {
+    $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
+    resetInput();
+  } else {
     alert('sasir tous les champs');
-  }*/
+  }
 });
 
+$('.btn-info').on("click", function() {
+  for (i = 0; i < $('input').length; i++) {
+    $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html($('input').eq(i).val());
+  }
+  $('.btn-primary').prop("disabled", false);
+  $(this).prop("disabled", true);
+  resetInput();
+});
 
 function resetInput() {
   $('input').val('');
