@@ -1,14 +1,16 @@
 $(function() {
-  $('form').css({
-    "margin-top": "50px"
-  });
-
   $('.btn-info').prop("disabled", true);
   inputs = $('input');
 
   $('thead').find('th').css({
     "text-align": "center",
     "vertical-align": "middle"
+  });
+
+  $('.nomTable').css({
+    "font-size": "25px",
+    "font-weight": "bold",
+    "margin": "20px 0px 20px 0px"
   });
 });
 
@@ -66,11 +68,13 @@ $(".btn-primary").on("click", function() {
     });
 
     $(".btn-danger").on("click", function() {
-      var deleteValue = $(this).val();
-      $('tbody').children('tr').eq(deleteValue - 1).remove();
-      if (!($('tbody').children('tr').length)) {
-        $('.btn-info').prop("disabled", true);
-        $('.btn-primary').prop("disabled", false);
+      if (confirm("Supprimer l'étudiant?")) {
+        var deleteValue = $(this).val();
+        $('tbody').children('tr').eq(deleteValue - 1).remove();
+        if (!($('tbody').children('tr').length)) {
+          $('.btn-info').prop("disabled", true);
+          $('.btn-primary').prop("disabled", false);
+        }
       }
     });
 
