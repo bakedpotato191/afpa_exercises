@@ -10,7 +10,7 @@ $(function() {
 });
 
 $(".btn-primary").on("click", function() {
-  if ($('input').not('.info').length == 0) {
+  if (verifierChamps()) {
     $('<tr></tr>').appendTo('tbody');
     $('<th></th>').attr("scope", "row").appendTo('tr:last');
 
@@ -47,9 +47,12 @@ $(".btn-primary").on("click", function() {
     });
 
     $(".btn-danger").on("click", function() {
-      $('tbody').children('tr').eq($(this).val() - 1).remove();
-      event.stopPropagation();
-      event.preventDefault();
+      var deleteValue = $(this).val();
+      $('tbody').children('tr').eq(deleteValue - 1).remove();
+      if (!($('tbody').children('tr').length)) {
+        $('.btn-info').prop("disabled", true);
+        $('.btn-primary').prop("disabled", false);
+      }
     });
 
     $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
@@ -60,12 +63,20 @@ $(".btn-primary").on("click", function() {
 });
 
 $('.btn-info').on("click", function() {
-  for (i = 0; i < $('input').length; i++) {
-    $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html($('input').eq(i).val());
+  if (verifierChamps()) {
+    for (i = 0; i < $('input').length; i++) {
+      $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html($('input').eq(i).val());
+    }
+    $('.btn-primary').prop("disabled", false);
+    $(this).prop("disabled", true);
+    resetInput();
+  } else {
+    if (!($('form').children('.warning').length)) {
+      $('form').append('<div></div>').attr("class", "warning").html('Saisir tous les champs');
+    } else {
+      $('.warning').html('Saisir tous les champs');
+    }
   }
-  $('.btn-primary').prop("disabled", false);
-  $(this).prop("disabled", true);
-  resetInput();
 });
 
 function resetInput() {
@@ -142,6 +153,15 @@ function setCorrect(element) {
   $('.info').css({
     "border": "2px solid green"
   });
+}
+
+function verifierChamps() {
+  if ($('input').not('.info').length == 0) {
+    return true;
+  } else {
+    return false;
+  }
+
 }
 
 function setPasCorrect(element) {
