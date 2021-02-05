@@ -81,9 +81,7 @@ $(".btn-primary").on("click", function() {
         }
       }
     });
-
     $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
-    $('.warning').remove();
     resetInput();
   } else {
     showWarning();
@@ -104,15 +102,13 @@ $('.btn-info').on("click", function() {
 });
 
 function resetInput() {
-  inputs.val('');
+  inputs.val('').css("border", "");
   inputs.removeClass('info');
-  inputs.css("border", "");
+  $('.warning').remove();
 };
 
 $('#inputNom, #inputPrenom').on("keypress", function() {
-  if (regexNomPrenom(event.key)) {
-    return true;
-  } else {
+  if (!(regexNomPrenom(event.key))) {
     event.preventDefault();
     return false;
   }
@@ -136,9 +132,7 @@ $('#inputEmail4').on("input", function() {
 });
 
 $('#inputTel').on("keypress", function() {
-  if (regexTelephone(event.key)) {
-    return true;
-  } else {
+  if (!(regexTelephone(event.key))) {
     event.preventDefault();
     return false;
   }
