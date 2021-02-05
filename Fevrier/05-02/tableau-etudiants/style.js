@@ -35,25 +35,25 @@ $(".btn-primary").on("click", function() {
       "justify-content": "center",
     }).appendTo('tr:last');
 
-    editNumber = $('.btn-success').length;
+    editNumber = $('.btn-modifier').length;
 
     $('<button></button>').attr({
       "type": "button",
-      "class": "btn btn-success",
+      "class": "btn btn-success btn-modifier",
       "value": editNumber + 1
     }).css({
       "margin-left": "10px"
     }).html('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>').appendTo('td:last');
 
-    deleteButton = $('.btn-danger').length;
+    deleteButton = $('.btn-supprimer').length;
 
     $('<button></button>').attr({
       "type": "button",
-      "class": "btn btn-danger",
+      "class": "btn btn-danger btn-supprimer",
       "value": deleteButton + 1
     }).css("margin-left", "10px").html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
 
-    $('.btn-success').on("click", function() {
+    $('.btn-modifier').on("click", function() {
       var child = $(this).parent().parent().children();
       var id = $(this).parent().parent().children('th').html();
       for (var index = 1; index < child.length - 1; index++) {
@@ -67,7 +67,7 @@ $(".btn-primary").on("click", function() {
       }
     });
 
-    $(".btn-danger").unbind('click').click(function() {
+    $(".btn-supprimer").unbind('click').click(function() {
       if (confirm("Supprimer l'étudiant?")) {
         $(this).closest('tr').remove();
         if (!($('tbody').children('tr').length)) {
@@ -75,7 +75,6 @@ $(".btn-primary").on("click", function() {
           $('.btn-primary').prop("disabled", false);
         }
         var element_th = $('tbody').find('th');
-        console.log(element_th);
         for (var i = 0; i < element_th.length; i++) {
           element_th.eq(i).html(i + 1);
         }
@@ -100,12 +99,6 @@ $('.btn-info').on("click", function() {
     showWarning();
   }
 });
-
-function resetInput() {
-  inputs.val('').css("border", "");
-  inputs.removeClass('info');
-  $('.warning').remove();
-};
 
 $('#inputNom, #inputPrenom').on("keypress", function() {
   if (!(regexNomPrenom(event.key))) {
@@ -202,3 +195,9 @@ function showWarning() {
     }).html('Saisir tous les champs').appendTo($('.button-container'));
   }
 }
+
+function resetInput() {
+  inputs.val('').css("border", "");
+  inputs.removeClass('info');
+  $('.warning').remove();
+};
