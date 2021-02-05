@@ -59,9 +59,10 @@ $(".btn-primary").on("click", function() {
     });
 
     $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
+    $('.warning').remove();
     resetInput();
   } else {
-    alert('sasir tous les champs');
+    showWarning();
   }
 });
 
@@ -74,11 +75,7 @@ $('.btn-info').on("click", function() {
     $(this).prop("disabled", true);
     resetInput();
   } else {
-    if (!($('form').children('.warning').length)) {
-      $('form').append('<div></div>').attr("class", "warning").html('Saisir tous les champs');
-    } else {
-      $('.warning').html('Saisir tous les champs');
-    }
+    showWarning();
   }
 });
 
@@ -173,4 +170,16 @@ function setPasCorrect(element) {
   $('.vide').css({
     "border": "2px solid red"
   });
+}
+
+function showWarning() {
+  if (!($('form').children('.warning').length)) {
+    $("<div></div>").addClass("warning").css({
+      "color": "red",
+      "font-size": "16px",
+      "display": "inline-block"
+    }).html('Saisir tous les champs').appendTo($('.button-container'));
+  } else {
+    $('.warning').html('Saisir tous les champs');
+  }
 }
