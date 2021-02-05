@@ -1,3 +1,4 @@
+var inputs, editButton, deleteButton, editNumber, i;
 $(function() {
   $('.btn-info').prop("disabled", true);
   inputs = $('input');
@@ -22,7 +23,7 @@ $(".btn-primary").on("click", function() {
       "vertical-align": "middle"
     }).html($('tbody').children('tr').length).appendTo('tr:last');
 
-    var classes = ['prenom', 'nom', 'email', 'telephone']
+    var classes = ['prenom', 'nom', 'email', 'telephone'];
     for (var i = 0; i < classes.length; i++) {
       $('<td></td>').attr("class", classes[i]).css({
         "text-align": "center",
@@ -55,15 +56,14 @@ $(".btn-primary").on("click", function() {
 
     $('.btn-modifier').on("click", function() {
       var child = $(this).parent().parent().children();
-      var id = $(this).parent().parent().children('th').html();
-      for (var index = 1; index < child.length - 1; index++) {
-        inputs.eq(index - 1).val(child[index].textContent);
+      for (i = 1; i < child.length - 1; i++) {
+        inputs.eq(i - 1).val(child[i].textContent);
       }
       $('.btn-primary').prop("disabled", true);
       $('.btn-info').prop("disabled", false);
       editButton = $(this).val();
-      for (var index = 0; index < inputs.length; index++) {
-        setCorrect(inputs.eq(index));
+      for (i = 0; i < inputs.length; i++) {
+        setCorrect(inputs.eq(i));
       }
     });
 
@@ -200,4 +200,4 @@ function resetInput() {
   inputs.val('').css("border", "");
   inputs.removeClass('info');
   $('.warning').remove();
-};
+}
