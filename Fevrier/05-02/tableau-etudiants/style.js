@@ -60,7 +60,7 @@ $(".btn-primary").on("click", function() {
       for (i = 1; i < child.length - 1; i++) {
         inputs.eq(i - 1).val(child[i].textContent);
       }
-      $('.btn-primary').prop("disabled", true);
+      $('.btn-primary').prop("disabled", true).blur();
       $('.btn-info').prop("disabled", false);
       editButton = $(this).val();
       for (i = 0; i < inputs.length; i++) {
@@ -92,10 +92,8 @@ $('.btn-info').on("click", function() {
       $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html(inputs.eq(i).val());
     }
     $('.btn-primary').prop("disabled", false);
-    $(this).prop("disabled", true);
+    $(this).prop("disabled", true).blur();
     resetInput();
-  } else {
-    showWarning();
   }
 });
 
