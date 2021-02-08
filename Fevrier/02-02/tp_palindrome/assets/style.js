@@ -1,8 +1,16 @@
 $('.btn').click(function() {
-  var input = $('#formGroupExampleInput2').val();
 
-  var input_table = input.split("");
-  var reverse_table = input.split("").reverse();
+  var input = $('#formGroupExampleInput2').val();
+  var input_table = input.split(",")
+  var reverse_table = input.split(" ");
+  console.log(input_table, reverse_table);
+
+
+  for (index = 0; index < input.length; index++) {
+    input_table[index] = input[index];
+  }
+
+  var reverse_table = input_table.reverse();
 
   if (compare(input_table, reverse_table)) {
     if ($('.alert').length === 0) {
@@ -21,7 +29,7 @@ $('.btn').click(function() {
 
 function compare(input, reverse) {
   for (var i = 0; i < input.length; i++) {
-    if (input[i] !== reverse[i]) {
+    if (input[i] !== reverse[reverse.length - i - 1]) {
       return false;
     }
   }
