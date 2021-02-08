@@ -55,12 +55,13 @@ $(".btn-primary").on("click", function() {
       "value": deleteButton + 1
     }).css("margin-left", "10px").html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
 
+    $('.btn-primary').blur();
     $('.btn-modifier').on("click", function() {
       var child = $(this).parent().parent().children();
       for (i = 1; i < child.length - 1; i++) {
         inputs.eq(i - 1).val(child[i].textContent);
       }
-      $('.btn-primary').prop("disabled", true).blur();
+      $('.btn-primary').prop("disabled", true);
       $('.btn-info').prop("disabled", false);
       editButton = $(this).val();
       for (i = 0; i < inputs.length; i++) {
