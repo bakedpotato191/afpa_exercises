@@ -1,4 +1,5 @@
 var inputs, editButton, deleteButton, editNumber, i;
+
 $(function() {
   $('.btn-info').prop("disabled", true);
   inputs = $('input');
@@ -82,8 +83,6 @@ $(".btn-primary").on("click", function() {
     });
     $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
     resetInput();
-  } else {
-    showWarning();
   }
 });
 
@@ -173,7 +172,16 @@ function setCorrect(element) {
 }
 
 function verifierChamps() {
-  if (!(inputs.not('.info').length)) {
+  var count = 0;
+  for (i = 0; i < inputs.length; i++) {
+    if (!(inputs.eq(i).hasClass('info'))) {
+      inputs.eq(i).css("border", "2px solid red");
+      count++;
+    }
+  }
+  if (count > 0) {
+    return false;
+  } else {
     return true;
   }
 }
@@ -184,16 +192,6 @@ function setPasCorrect(element) {
   $('.vide').css({
     "border": "2px solid red"
   });
-}
-
-function showWarning() {
-  if (!($('.button-container').children('.warning').length)) {
-    $("<div></div>").addClass("warning").css({
-      "color": "red",
-      "font-size": "16px",
-      "display": "inline-block"
-    }).html('Saisir tous les champs').appendTo($('.button-container'));
-  }
 }
 
 function resetInput() {
