@@ -185,7 +185,7 @@ function verifierChamps() {
 function emailExists(email) {
   var exists = false;
   for (var i = 0; i < etudiants.length; i++) {
-    if ((etudiants[i].email == email) && !((editButton - 1) === i)) {
+    if ((etudiants[i].email == email) && ((editButton - 1) !== i)) {
       exists = true;
       break;
     }
