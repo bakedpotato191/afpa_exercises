@@ -47,10 +47,8 @@ $('.btn-sauvegarder').on("click", function() {
 });
 
 $('#inputNom, #inputPrenom').on("keypress", function() {
-  if (!(regexNomPrenom(event.key))) {
-    event.preventDefault();
-    return false;
-  }
+  return(regexNomPrenom(event.key));
+
 });
 
 $('#inputNom, #inputPrenom').on("input", function() {
@@ -62,8 +60,7 @@ $('#inputNom, #inputPrenom').on("input", function() {
 });
 
 $('#inputEmail4').on("input", function() {
-  var regex = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-  if (regex.test($(this).val()) && !(emailExists($(this).val()))) {
+  if (regexEmail($(this).val()) && !(emailExists($(this).val()))) {
     setCorrect($(this));
   } else {
     setPasCorrect($(this));
@@ -71,10 +68,7 @@ $('#inputEmail4').on("input", function() {
 });
 
 $('#inputTel').on("keypress", function() {
-  if (!(regexTelephone(event.key))) {
-    event.preventDefault();
-    return false;
-  }
+  return(regexTelephone(event.key));
 });
 
 $('#inputTel').on("input", function() {
@@ -181,6 +175,11 @@ function regexNomPrenom(key) {
 function regexTelephone(key) {
   var regex = /^[0-9+]*$/;
   return (regex.test(key));
+}
+
+function regexEmail(value){
+  var regex = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  return (regex.test(value));
 }
 
 function verifierChamps() {
