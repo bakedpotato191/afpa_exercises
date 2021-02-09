@@ -38,7 +38,7 @@ $('.btn-sauvegarder').on("click", function() {
     };
 
     for (i = 0; i < inputs.length; i++) {
-      $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html(Object.values(Object.values(etudiants[obj_index]))[i]);
+      $('tbody tr').eq(editButton - 1).children('td').eq(i).html(Object.values(Object.values(etudiants[obj_index]))[i]);
     }
 
     $('.btn-ajouter').prop("disabled", false);
@@ -55,7 +55,7 @@ $('#inputNom, #inputPrenom').on("keypress", function() {
 });
 
 $('#inputNom, #inputPrenom').on("input", function() {
-  if ($(this).val().length > 0) {
+  if ($(this).val().length) {
     setCorrect($(this));
   } else {
     setPasCorrect($(this));
@@ -98,7 +98,7 @@ function creationLigne() {
   $('<th></th>').attr("scope", "row").css({
     "text-align": "center",
     "vertical-align": "middle"
-  }).html($('tbody').children('tr').length).appendTo('tr:last');
+  }).html($('tbody tr').length).appendTo('tr:last');
 
   var nouveau_etudiant = {
     "prenom": inputs.eq(0).val(),
@@ -117,18 +117,19 @@ function creationLigne() {
     }).html(last[key]).appendTo('tr:last');
   });
 
-
   $('<td></td>').css({
     "display": "flex",
     "justify-content": "center",
   }).appendTo('tr:last');
+}
 
+function ajouterLesBoutons() {
   editNumber = $('.btn-modifier').length;
 
   $('<button></button>').attr({
     "type": "button",
     "class": "btn btn-success btn-modifier",
-    "value": editNumber + 1
+    "id": editNumber + 1
   }).css({
     "margin-left": "10px"
   }).html('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>').appendTo('td:last');
@@ -137,9 +138,7 @@ function creationLigne() {
     "type": "button",
     "class": "btn btn-danger btn-supprimer"
   }).css("margin-left", "10px").html('<i class="fa fa-trash" aria-hidden="true"></i>').appendTo('td:last');
-}
 
-function ajouterLesBoutons() {
   $('.btn-ajouter').blur();
   $('.btn-modifier').on("click", function() {
     var child = $(this).parent().parent().children();
@@ -148,7 +147,7 @@ function ajouterLesBoutons() {
     }
     $('.btn-ajouter').prop("disabled", true);
     $('.btn-sauvegarder').prop("disabled", false);
-    editButton = $(this).val();
+    editButton = $(this).attr('id');
     for (i = 0; i < inputs.length; i++) {
       setCorrect(inputs.eq(i));
     }
@@ -162,50 +161,39 @@ function ajouterLesBoutons() {
       tr.remove();
       etudiants.splice(tr_index, 1);
 
-      if (!($('tbody').children('tr').length)) {
+      if (!($('tbody tr').length)) {
         $('.btn-sauvegarder').prop("disabled", true);
         $('.btn-ajouter').prop("disabled", false);
       }
-      var element_th = $('tbody').find('th');
+      var element_th = $('tbody th');
       for (var i = 0; i < etudiants.length; i++) {
         element_th.eq(i).html(i + 1);
       }
     }
   });
+
   $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
 }
 
 function regexNomPrenom(key) {
   var regex = /^[a-zA-ZÀ-ÿ-. ]*$/;
-  if (regex.test(key)) {
-    return true;
-  } else {
-    return false;
-  }
+  return (regex.test(key));
 }
 
 function regexTelephone(key) {
   var regex = /^[0-9+]*$/;
-  if (regex.test(key)) {
-    return true;
-  } else {
-    return false;
-  }
+  return (regex.test(key));
 }
 
 function verifierChamps() {
-  var count = 0;
+  var correct = true;
   for (i = 0; i < inputs.length; i++) {
     if (!(inputs.eq(i).hasClass('rempli'))) {
       inputs.eq(i).css("border", "2px solid red");
-      count++;
+      correct = false;
     }
   }
-  if (count > 0) {
-    return false;
-  } else {
-    return true;
-  }
+  return correct;
 }
 
 function emailExists(email) {
