@@ -28,7 +28,6 @@ $(".btn-ajouter").on("click", function() {
 
 $('.btn-sauvegarder').on("click", function() {
   if (verifierChamps()) {
-
     var obj_index = editButton - 1;
     etudiants[obj_index] = {
       "prenom": inputs.eq(0).val(),
@@ -141,25 +140,26 @@ function ajouterLesBoutons() {
 
   $('.btn-ajouter').blur();
   $('.btn-modifier').on("click", function() {
-    var child = $(this).parent().parent().children();
-    for (i = 1; i < child.length - 1; i++) {
-      inputs.eq(i - 1).val(child[i].textContent);
-    }
-    $('.btn-ajouter').prop("disabled", true);
-    $('.btn-sauvegarder').prop("disabled", false);
-    editButton = $(this).attr('id');
-    for (i = 0; i < inputs.length; i++) {
+
+    var cells = $('tbody tr').eq($(this).index()).children('td');
+
+    for (i = 0; i < cells.length; i++) {
+      inputs.eq(i).val(cells[i].textContent);
       setCorrect(inputs.eq(i));
     }
+
+    editButton = $(this).index() + 1; 
+
+    $('.btn-ajouter').prop('disabled', true);
+    $('.btn-sauvegarder').prop('disabled', false);
   });
 
   $(".btn-supprimer").unbind('click').click(function() {
     if (confirm("Supprimer l'étudiant?")) {
 
-      var tr = $(this).closest('tr');
-      var tr_index = tr.index();
-      tr.remove();
-      etudiants.splice(tr_index, 1);
+      ($('tbody tr').eq($(this).index() - 1)).remove();
+
+      etudiants.splice($(this).index() - 1, 1);
 
       if (!($('tbody tr').length)) {
         $('.btn-sauvegarder').prop("disabled", true);
@@ -171,8 +171,6 @@ function ajouterLesBoutons() {
       }
     }
   });
-
-  $('button:last').html('<i class="fa fa-trash" aria-hidden="true"></i>');
 }
 
 function regexNomPrenom(key) {
@@ -197,28 +195,26 @@ function verifierChamps() {
 }
 
 function emailExists(email) {
-  var found = false;
+  var exists = false;
   for (var i = 0; i < etudiants.length; i++) {
     if ((etudiants[i].email == email) && !((editButton - 1) === i)) {
-      found = true;
+      exists = true;
       break;
     }
   }
-  return found;
+  return exists;
 }
 
 function setCorrect(element) {
   element.removeClass('vide');
-  element.addClass('rempli');
-  $('.rempli').css({
+  element.addClass('rempli').css({
     "border": "2px solid green"
   });
 }
 
 function setPasCorrect(element) {
   element.removeClass('rempli');
-  element.addClass('vide');
-  $('.vide').css({
+  element.addClass('vide').css({
     "border": "2px solid red"
   });
 }
