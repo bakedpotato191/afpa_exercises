@@ -157,7 +157,7 @@ function ajouterLesBoutons() {
   $(".btn-supprimer").unbind('click').click(function() {
     if (confirm("Supprimer l'étudiant?")) {
 
-      ($('tbody tr').eq($(this).index() - 1)).remove();
+      $('tbody tr').eq($(this).index() - 1).remove();
 
       etudiants.splice($(this).index() - 1, 1);
 
