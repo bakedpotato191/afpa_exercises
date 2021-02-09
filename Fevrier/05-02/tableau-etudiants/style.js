@@ -52,19 +52,12 @@ $('#inputNom, #inputPrenom').on("keypress", function() {
 });
 
 $('#inputNom, #inputPrenom').on("input", function() {
-  if ($(this).val().length) {
-    setCorrect($(this));
-  } else {
-    setPasCorrect($(this));
-  }
+  return (setCorrectPasCorrect($(this).val().length, $(this)));
 });
 
 $('#inputEmail4').on("input", function() {
-  if (regexEmail($(this).val()) && !(emailExists($(this).val()))) {
-    setCorrect($(this));
-  } else {
-    setPasCorrect($(this));
-  }
+  let valeur = regexEmail($(this).val()) && !(emailExists($(this).val()));
+  return (setCorrectPasCorrect(valeur, $(this)));
 });
 
 $('#inputTel').on("keypress", function() {
@@ -73,11 +66,7 @@ $('#inputTel').on("keypress", function() {
 
 $('#inputTel').on("input", function() {
   var phoneExp = /^((\+)33|0|0033)[1-9](\d{2}){4}$/g;
-  if (phoneExp.test($(this).val())) {
-    setCorrect($(this));
-  } else {
-    setPasCorrect($(this));
-  }
+  return (setCorrectPasCorrect(phoneExp.test($(this).val()), $(this)));
 });
 
 $('#inputNom, #inputPrenom,#inputEmail4, #inputTel').on('keyup', function(e) {
@@ -139,7 +128,7 @@ function ajouterLesBoutons() {
 
     for (i = 0; i < cells.length; i++) {
       inputs.eq(i).val(cells[i].textContent);
-      setCorrect(inputs.eq(i));
+      setCorrectPasCorrect(true, inputs.eq(i));
     }
 
     editButton = $(this).index() + 1; 
@@ -204,19 +193,19 @@ function emailExists(email) {
   return exists;
 }
 
-function setCorrect(element) {
+function setCorrectPasCorrect(value, element) {
+  if (value){
   element.removeClass('vide');
   element.addClass('rempli').css({
     "border": "2px solid green"
   });
-}
-
-function setPasCorrect(element) {
+  } else{
   element.removeClass('rempli');
   element.addClass('vide').css({
     "border": "2px solid red"
   });
-}
+  }
+} 
 
 function resetInput() {
   inputs.val('').css("border", "");
