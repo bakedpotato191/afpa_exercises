@@ -64,7 +64,7 @@ $('#inputNom, #inputPrenom').on("input", function() {
 
 $('#inputEmail4').on("input", function() {
   var regex = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-  if (regex.test($(this).val()) && !(emailExists($(this).val(), $('.btn-sauvegarder').prop("disabled")))) {
+  if (regex.test($(this).val()) && !(emailExists($(this).val()))) {
     setCorrect($(this));
   } else {
     setPasCorrect($(this));
@@ -208,12 +208,9 @@ function verifierChamps() {
   }
 }
 
-function emailExists(email, prop) {
+function emailExists(email) {
   var found = false;
   for (var i = 0; i < etudiants.length; i++) {
-    if (prop === false) {
-      break;
-    }
     if (etudiants[i].email == email) {
       found = true;
       break;
