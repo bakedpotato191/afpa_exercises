@@ -18,7 +18,7 @@ $(function() {
   etudiants = [];
 });
 
-$(".btn-primary").on("click", function() {
+$(".btn-ajouter").on("click", function() {
   if (verifierChamps()) {
     creationLigne();
     ajouterLesBoutons();
@@ -28,17 +28,20 @@ $(".btn-primary").on("click", function() {
 
 $('.btn-sauvegarder').on("click", function() {
   if (verifierChamps()) {
-    for (i = 0; i < inputs.length; i++) {
-      $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html(inputs.eq(i).val());
-    }
 
-    etudiants[editButton - 1] = {
+    var obj_index = editButton - 1;
+    etudiants[obj_index] = {
       "prenom": inputs.eq(0).val(),
       "nom": inputs.eq(1).val(),
       "email": inputs.eq(2).val(),
       "telephone": inputs.eq(3).val()
+    };
+
+    for (i = 0; i < inputs.length; i++) {
+      $('tbody').children('tr').eq(editButton - 1).children('td').eq(i).html(Object.values(Object.values(etudiants[obj_index]))[i]);
     }
-    $('.btn-primary').prop("disabled", false);
+
+    $('.btn-ajouter').prop("disabled", false);
     $(this).prop("disabled", true).blur();
     resetInput();
   }
@@ -86,7 +89,7 @@ $('#inputTel').on("input", function() {
 
 $('#inputNom, #inputPrenom,#inputEmail4, #inputTel').on('keyup', function(e) {
   if (e.key === 'Enter' || e.keyCode === 13) {
-    $('.btn-primary').trigger("click");
+    $('.btn-ajouter').trigger("click");
   }
 });
 
@@ -97,12 +100,12 @@ function creationLigne() {
     "vertical-align": "middle"
   }).html($('tbody').children('tr').length).appendTo('tr:last');
 
-  let nouveau_etudiant = {
+  var nouveau_etudiant = {
     "prenom": inputs.eq(0).val(),
     "nom": inputs.eq(1).val(),
     "email": inputs.eq(2).val(),
     "telephone": inputs.eq(3).val()
-  }
+  };
 
   etudiants.push(nouveau_etudiant);
   var last = etudiants.slice(-1)[0];
@@ -137,13 +140,13 @@ function creationLigne() {
 }
 
 function ajouterLesBoutons() {
-  $('.btn-primary').blur();
+  $('.btn-ajouter').blur();
   $('.btn-modifier').on("click", function() {
     var child = $(this).parent().parent().children();
     for (i = 1; i < child.length - 1; i++) {
       inputs.eq(i - 1).val(child[i].textContent);
     }
-    $('.btn-primary').prop("disabled", true);
+    $('.btn-ajouter').prop("disabled", true);
     $('.btn-sauvegarder').prop("disabled", false);
     editButton = $(this).val();
     for (i = 0; i < inputs.length; i++) {
@@ -154,14 +157,14 @@ function ajouterLesBoutons() {
   $(".btn-supprimer").unbind('click').click(function() {
     if (confirm("Supprimer l'étudiant?")) {
 
-      let tr = $(this).closest('tr');
-      let tr_index = tr.index();
+      var tr = $(this).closest('tr');
+      var tr_index = tr.index();
       tr.remove();
       etudiants.splice(tr_index, 1);
 
       if (!($('tbody').children('tr').length)) {
         $('.btn-sauvegarder').prop("disabled", true);
-        $('.btn-primary').prop("disabled", false);
+        $('.btn-ajouter').prop("disabled", false);
       }
       var element_th = $('tbody').find('th');
       for (var i = 0; i < etudiants.length; i++) {
@@ -193,7 +196,7 @@ function regexTelephone(key) {
 function verifierChamps() {
   var count = 0;
   for (i = 0; i < inputs.length; i++) {
-    if (!(inputs.eq(i).hasClass('info'))) {
+    if (!(inputs.eq(i).hasClass('rempli'))) {
       inputs.eq(i).css("border", "2px solid red");
       count++;
     }
@@ -218,14 +221,14 @@ function emailExists(email) {
 
 function setCorrect(element) {
   element.removeClass('vide');
-  element.addClass('info');
-  $('.info').css({
+  element.addClass('rempli');
+  $('.rempli').css({
     "border": "2px solid green"
   });
 }
 
 function setPasCorrect(element) {
-  element.removeClass('info');
+  element.removeClass('rempli');
   element.addClass('vide');
   $('.vide').css({
     "border": "2px solid red"
@@ -234,6 +237,6 @@ function setPasCorrect(element) {
 
 function resetInput() {
   inputs.val('').css("border", "");
-  inputs.removeClass('info');
+  inputs.removeClass('rempli');
   $('.warning').remove();
 }
