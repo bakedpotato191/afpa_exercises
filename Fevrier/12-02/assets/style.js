@@ -7,7 +7,7 @@ $(document).ready(function() {
 
       var main = "<div class='container'>";
       main += "<h4>Mon Panier</h4>";
-      main += "<ul class='list-group'>";
+      main += "<ul class='list-group'></ul></div>";
       $('body').append(main);
 
       for (var i = 0; i < data.items.length; i++) {
