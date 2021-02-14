@@ -1,0 +1,19 @@
+{
+  "items": [{
+      "nom": "Billet Match",
+      "prix": "10"
+    },
+    {
+      "nom": "Billet Train",
+      "prix": "20"
+    },
+    {
+      "nom": "Billet Musee",
+      "prix": "12"
+    },
+    {
+      "nom": "Billet Avion",
+      "prix": "30"
+    }
+  ]
+}
