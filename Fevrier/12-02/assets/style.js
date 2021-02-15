@@ -5,29 +5,41 @@ $(document).ready(function() {
     dataType: "json",
     success: function(data) {
 
-      var main = "<div class='container'>";
-      main += "<h4>Mon Panier</h4>";
-      main += "<ul class='list-group'></ul></div>";
-      $('body').append(main);
+      var item = "<li class='list-group-item'>";
+      item += "<form> <div class=form-group row item-name>";
+      item += "<p style='font-weight: bold; padding-bottom:40px'> </p></div>";
+      item += "<div class='form-group row item-row' style='margin-left: 0px; margin-bottom:0px'>";
+      item += "<label for='exampleFormControlInput1'>Quantité:</label>";
+      item += "<div class='col col-sm-3'>";
+      item += "<input type='text' class='form-control form-control-sm quantite' placeholder='' autocomplete='off'> </div>";
+      item += "<label for='exampleFormControlInput1'>Prix:</label>";
+      item += "<div class='col col-sm-3'>";
+      item += "<input type='text' class='form-control form-control-sm prix' placeholder='' readonly> </div>";
+      item += "<label for='exampleFormControlInput1'>Total:</label>";
+      item += "<div class='col col-sm-3'>";
+      item += "<input type='text' class='form-control form-control-sm total' placeholder='' readonly autocomplete='off'>";
+      item += "</div> </div> </form> </li>";
 
       for (var i = 0; i < data.items.length; i++) {
-        var item = "<li class='list-group-item list-group-item-success'>";
-        item += "<form> <div class=form-group row item-name>";
-        item += "<p style='font-weight: bold; padding-bottom:40px'>" + data.items[i].nom + "</p></div>";
-        item += "<div class='form-group row item-row' style='margin-left: 0px; margin-bottom:0px'>";
-        item += "<label for='exampleFormControlInput1'>Quantité:</label>";
-        item += "<div class='col col-sm-3'>";
-        item += "<input type='text' class='form-control form-control-sm quantite' placeholder='' autocomplete='off'> </div>";
-        item += "<label for='exampleFormControlInput1'>Prix:</label>";
-        item += "<div class='col col-sm-3'>";
-        item += "<input type='text' class='form-control form-control-sm prix' placeholder='' readonly> </div>";
-        item += "<label for='exampleFormControlInput1'>Total:</label>";
-        item += "<div class='col col-sm-3'>";
-        item += "<input type='text' class='form-control form-control-sm total' placeholder='' readonly autocomplete='off'>";
-        item += "</div> </div> </form> </li>";
         $('.list-group').append(item);
+        $('p').eq(i).html(data.items[i].nom)
         $('input.prix').eq(i).val(data.items[i].prix);
+
+        if (i % 2 === 0) {
+          $('li').eq(i).addClass("list-group-item-success");
+        } else {
+          $('li').eq(i).addClass("list-group-item-primary");
+        }
       }
+
+      var form_net = "<form class='form-net form-inline'>";
+      form_net += "<div class='form-group'>"
+      form_net += "<label for='net'>Net à payer:</label>";
+      form_net += "<input type='text' class='form-control mx-sm-3 net' disabled></div>"
+
+      $('.container').append(form_net);
+      $('.form-net').css("margin-top", "20px");
+
     },
     error: function(status, text) {
       console.log(status)
@@ -48,10 +60,8 @@ $(document).ready(function() {
       for (var i = 0; i < $('input.total').length; i++) {
         total_price += Number($('input.total').eq(i).val());
       }
-      if ($('.total-prix').length) {
-        $('.total-prix').html("Net a payer: " + total_price);
-      } else {
-        $("<div class='total-prix'></div>").css("font-weight", "bold").html("Net a payer: " + total_price).appendTo($('.container'));
+      if ($('.total').length) {
+        $("input.net").val(total_price);
       }
     };
 
