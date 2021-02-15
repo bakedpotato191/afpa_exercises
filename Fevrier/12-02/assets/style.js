@@ -9,13 +9,13 @@ $(document).ready(function() {
       item += "<form> <div class=form-group row item-name>";
       item += "<p style='font-weight: bold; padding-bottom:40px'> </p></div>";
       item += "<div class='form-group row item-row' style='margin-left: 0px; margin-bottom:0px'>";
-      item += "<label for='exampleFormControlInput1'>Quantité:</label>";
+      item += "<label for='quantite'>Quantité:</label>";
       item += "<div class='col col-sm-3'>";
       item += "<input type='text' class='form-control form-control-sm quantite' placeholder='' autocomplete='off'> </div>";
-      item += "<label for='exampleFormControlInput1'>Prix:</label>";
+      item += "<label for='prix'>Prix:</label>";
       item += "<div class='col col-sm-3'>";
       item += "<input type='text' class='form-control form-control-sm prix' placeholder='' readonly> </div>";
-      item += "<label for='exampleFormControlInput1'>Total:</label>";
+      item += "<label for='total'>Total:</label>";
       item += "<div class='col col-sm-3'>";
       item += "<input type='text' class='form-control form-control-sm total' placeholder='' readonly autocomplete='off'>";
       item += "</div> </div> </form> </li>";
@@ -38,7 +38,13 @@ $(document).ready(function() {
       form_net += "<input type='text' class='form-control mx-sm-3 net' disabled></div>"
 
       $('.container').append(form_net);
-      $('.form-net').css("margin-top", "20px");
+      $('.form-net').css({
+        "padding": "20px 0px 20px 0px",
+        "font-weight": "bold"
+      });
+      $("label[for='total']").css("font-weight", "bold");
+      $('input.net').css("font-weight", "bold");
+      $('.container').css("background-color", "#f3f3f3");
 
     },
     error: function(status, text) {
