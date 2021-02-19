@@ -102,6 +102,10 @@ header nav ul li a {
   margin-top: 20px;
 }
 
+.myself h3:hover {
+  color: var(--orange);
+}
+
 .myself h3, p {
   color: white;
 }
@@ -129,6 +133,10 @@ header nav ul li a {
   margin: 0px 5px 0px 5px;
 }
 
+.logos ul li:hover {
+  filter: drop-shadow(10px 10px 15px orange);
+}
+
 .logos ul li a img {
   width: 32px;
   height: 32px;
@@ -145,10 +153,15 @@ header nav ul li a {
   font-family: "Liberation Mono";
 }
 
+.a-propos ul {
+  text-align: left;
+}
+
 .a-propos ul li {
   color: var(--white);
   list-style-type: none;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .progress-bar {
@@ -165,7 +178,17 @@ header nav ul li a {
   height: 22px;
   background-color: var(--white);
   border-radius: 3px;
-  transition: width 500ms ease-in-out;
+  animation: load 3s normal forwards;
+}
+
+@keyframes load {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    max-width: 100%;
+  }
 }
 
 .progress-name-percent {
@@ -175,7 +198,11 @@ header nav ul li a {
   justify-content: space-between;
 }
 
-.progress-name-percent h3 {
+.progress-name-percent h3:nth-child(1) {
+  color: var(--orange);
+}
+
+.progress-name-percent h3:nth-child(2) {
   color: var(--white);
 }
 
@@ -207,9 +234,9 @@ table td {
   height: 300px;
   width: 400px;
   border-radius: 20px;
-  filter: drop-shadow(1px 1px 5px #d2d2d2);
-  -webkit-filter: drop-shadow(1px 1px 5px #d2d2d2);
-  -moz-filter: drop-shadow(1px 1px 5px #d2d2d2);
+  filter: drop-shadow(1px 1px 4px #d2d2d2);
+  -webkit-filter: drop-shadow(1px 1px 4px #d2d2d2);
+  -moz-filter: drop-shadow(1px 1px 4px #d2d2d2);
 }
 
 .html-css, .js {
@@ -218,6 +245,18 @@ table td {
 
 label {
   color: white;
+}
+
+section img:hover {
+  filter: drop-shadow(2px 2px 5px orange);
+}
+
+button:hover {
+  border: 1px solid var(--orange) !important;
+}
+
+.arrowtop, .arrowbtm {
+  cursor: pointer;
 }
 
 .web-design-content, .html-css-content, .ui-ux-content, .js-content {
@@ -234,7 +273,7 @@ label {
 }
 
 .web-design-content h1, .html-css-content h1, .ui-ux-content h1, .js-content h1 {
-  color: var(--white);
+  color: var(--orange);
 }
 
 .web-design-content h1, .html-css-content h1, .ui-ux-content h1, .js-content h1 {
@@ -252,6 +291,10 @@ button {
   border-radius: 10px;
   align-self: center;
   font-family: "Noto Sans";
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 *, ::after, ::before {
@@ -364,7 +407,7 @@ textarea {
   }
 
   .container {
-    padding: 0px 100px 0px 100px;
+    padding: 0px 150px 0px 150px;
   }
 }
 

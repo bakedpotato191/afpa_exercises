@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('li a').click(function() {
+  $('nav ul li a').click(function() {
 
     $.ajax({
       url: $(this).attr("href"), //propos.html
@@ -17,10 +17,18 @@ $(document).ready(function() {
   });
 
   $('body').on('click', '.arrowtop img', function() {
-    $('html').animate({
+    $('html, body').animate({
         scrollTop: $("body").offset().top
       },
-      800);
+      1200);
+    return false;
+  });
+
+  $('body').on('click', '.arrowbtm img', function() {
+    $('html, body').animate({
+      scrollTop: $(document).height()
+    }, 1200);
+    return false;
   });
 
   set_li_effect_desktop();
@@ -47,7 +55,7 @@ function set_li_effect_desktop() {
       }
     });
 
-    $('.header-desktop nav ul li a').on("click", function() {
+    $('nav ul li a').on("click", function() {
       $('li').removeClass('active').css("background", "transparent");
       $('li').children('a').css("color", "white");
       $(this).css("color", "var(--gray-dark)");
