@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('nav ul li a').click(function() {
+  $('li a').click(function() {
 
     $.ajax({
       url: $(this).attr("href"), //propos.html
@@ -16,29 +16,46 @@ $(document).ready(function() {
     return false;
   });
 
-  $('li').on("mouseover", function() {
-    $(this).css("background", "var(--white)");
-    $(this).children().css("color", "var(--gray-dark)");
-  });
-
-  $('li').on("mouseout", function() {
-    $(this).css("background", "transparent");
-    $(this).children().css("color", "var(--white)");
-  });
-
-  $('li').eq(0).css("border-top", "2px solid var(--white)");
-
-  $('body').on('click', '.arrowbtm img', function() {
-    $('html').animate({
-        scrollTop: $(".web-design").offset().top
-      },
-      800);
-  });
-
   $('body').on('click', '.arrowtop img', function() {
     $('html').animate({
-        scrollTop: $(".container").offset().top
+        scrollTop: $("body").offset().top
       },
       800);
   });
+
+  set_li_effect_desktop();
+
+  $(window).resize(function() {
+    set_li_effect_desktop()
+  });
+
 });
+
+function set_li_effect_desktop() {
+  if ($('body').width() >= 1025) {
+    $('.header-desktop nav ul li').on("mouseover", function() {
+      if (!($(this).hasClass('active'))) {
+        $(this).css("background", "var(--white)");
+        $(this).children().css("color", "var(--gray-dark)");
+      }
+    });
+
+    $('.header-desktop nav ul li').on("mouseout", function() {
+      if (!($(this).hasClass('active'))) {
+        $(this).css("background", "transparent");
+        $(this).children().css("color", "var(--white)");
+      }
+    });
+
+    $('.header-desktop nav ul li a').on("click", function() {
+      $('li').removeClass('active').css("background", "transparent");
+      $('li').children('a').css("color", "white");
+      $(this).css("color", "var(--gray-dark)");
+      $(this).parent().addClass('active').css("background-color", "white")
+    });
+
+    $('.header-desktop nav ul li').eq(0).css("border-top", "2px solid var(--white)");
+  } else {
+    $('li').off();
+  }
+}
