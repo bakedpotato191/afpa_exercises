@@ -43,9 +43,9 @@ SELECT * from etudiants group by date (dn); /* afficher la liste des étudiants 
 SELECT * from etudiants WHERE niveau='bac' or niveau='cap'; /* afficher la liste des étudiants ayant le niveau bac ou cap */
 SELECT AVG(notes) from examen; /* afficher la moyenne des notes */
 SELECT matricule, AVG(notes) FROM examen GROUP BY matricule; /* afficher la moyenne de note de chaque etudiants */
+SELECT * from examen group by matricule having avg(notes) >=10; /* afficher la liste des etudiants avec avg>=10 */
 SELECT codee, AVG(notes) FROM examen GROUP BY codee; /* afficher le moyenne de note de chaque cours */
 SELECT count(*) from etudiants; /* compter le nombre des étudiants */
-
 
 
 
