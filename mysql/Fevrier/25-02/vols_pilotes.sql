@@ -4,10 +4,10 @@ use formation;
 CREATE TABLE avions (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     NumAv VARCHAR(5) NOT NULL,
-    NomAv varchar(5) NOT NULL,
-    Capacité int(3) NOT NULL,
-    Localisation varchar(10) NOT NULL
-);
+    NomAv VARCHAR(5) NOT NULL,
+    Capacité INT(3) NOT NULL,
+    Localisation VARCHAR(10) NOT NULL
+)
 
 INSERT into avions (NumAv, NomAv, Capacité, Localisation) values 
 ('00001', 'Alpha', '300', 'Paris'), 
@@ -18,14 +18,14 @@ INSERT into avions (NumAv, NomAv, Capacité, Localisation) values
 /* table vols */
 CREATE TABLE vols (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    NumVol VARCHAR(6) NOT NULL,	
-    NumAv int(6) NOT NULL,
-    NumPil varchar(5) NOT NULL,
-    Ville_depart varchar(15) NOT NULL,
-    Ville_arrive varchar(15) NOT NULL,
-    Heure_dep time NOT NULL,
-    Heure_arrivee time NOT NULL
-);
+    NumVol VARCHAR(6) NOT NULL,
+    NumAv INT(6) NOT NULL,
+    NumPil VARCHAR(5) NOT NULL,
+    Ville_depart VARCHAR(15) NOT NULL,
+    Ville_arrive VARCHAR(15) NOT NULL,
+    Heure_dep TIME NOT NULL,
+    Heure_arrivee TIME NOT NULL
+)
 
 INSERT into vols (NumVol, NumAv, NumPil, Ville_depart, Ville_arrive, Heure_dep, Heure_arrivee) values 
 ('AF351', '152010', '00001', 'Paris', 'New York', '05:00', '23:00'), 
@@ -40,7 +40,7 @@ CREATE TABLE pilotes (
     NumPil VARCHAR(5) NOT NULL,
     Adresse VARCHAR(15) NOT NULL,
     Salaire INT(6) NOT NULL
-);
+)
 
 INSERT into pilotes (NomPil, NumPil, Adresse, Salaire) values 
 ('Déodat Clothilde', '00001', 'Paris', '650000'), 
@@ -83,43 +83,6 @@ SELECT * from pilotes WHERE NomPil LIKE '__s%';
 /* Quels sont les numéros des pilotes qui ne sont pas en service ? */
 
 /* ??? */
-
-
-
-
-
-
-
-
-
-
-/* afficher toutes les informations sur les pilotes de compagnie */
-SELECT DISTINCT
-    nom_pilote,
-    prenom_pilote,
-    ville_origine_pilote,
-    distance_pilote,
-    NumVols,
-    code_vol,
-    ville_depart,
-    ville_arrive,
-    temp_depart,
-    temp_arrive,
-    id_pilote AS code_pilote
-FROM
-    pilotes AS p,
-    vols AS v
-WHERE
-    p.code_pilote = v.id_pilote
-
-/* afficher le numéro des pilotes en service et les villes de départ de ses velos*/
-SELECT DISTINCT
-    ville_depart, id_pilote AS code_pilote
-FROM
-    pilotes AS p,
-    vols AS v
-WHERE
-    p.code_pilote = v.id_pilote
 
 
 
