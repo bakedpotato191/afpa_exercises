@@ -1,9 +1,9 @@
-#1
+##1
 
 CREATE SCHEMA immobilier;
 use immobilier;
 
-#2
+##2
 
 CALL create_table_agence();
 CALL create_table_logement();
@@ -18,7 +18,7 @@ CALL insert_info_demande();
 CALL insert_info_logement_agence();
 CALL insert_info_logement_personne();
 
-#3
+##3
 
 #3.1
 
@@ -72,57 +72,55 @@ SELECT DISTINCT ville from logement where type='maison';
 
 UPDATE logement_agence SET frais='730' WHERE idLogement='00003';
 
-#3.14 Quels sont les logements gérés par l’agence « seloger »
+#3.14
 
 SELECT * from logement as l, logement_agence as la WHERE idAgence in (SELECT idAgence from agence WHERE nom LIKE 'seloger') and l.idLogement = la.idLogement;
 
-#3.15 Affichez le nombre de propriétaires dans la ville de Paris (Alias : Nombre)
+#3.15
 
 SELECT COUNT(*) from logement as l, logement_personne as lp WHERE lp.idLogement in (SELECT idLogement from logement where ville LIKE 'Paris') and l.idLogement = lp.idLogement;
 
-#3.16 Affichez les informations des trois premières personnes souhaitant acheter un logement
+#3.16
 
 SELECT * from personne as p
 INNER JOIN (SELECT idPersonne from demande LIMIT 3) as d on p.idPersonne = d.idPersonne;
 
-#3.17 Affichez les prénoms, email des personnes souhaitant accéder à un logement en location sur la ville de Paris
+#3.17
 
-SELECT prenom, email from personne as p
-INNER JOIN (SELECT * from demande where ville like 'Paris') as d on p.idPersonne = d.idPersonne;
+SELECT prenom, email FROM personne AS p
+INNER JOIN (SELECT * FROM demande WHERE ville LIKE 'Paris') AS d ON p.idPersonne = d.idPersonne;
 
 #3.18 
 
-select a.nom,
-       b.frais
-from agence as a
-inner join
-(
-    select idAgence, sum(frais) as frais
-    from logement_agence
-    group by idAgence
-) as b on a.idAgence = b.idAgence;
+SELECT a.nom, b.frais FROM agence AS a
+INNER JOIN (SELECT idAgence, SUM(frais) AS frais FROM logement_agence GROUP BY idAgence) AS b ON a.idAgence = b.idAgence;
 
 #3.19
-SELECT
-	p.idPersonne,
-	p.prenom,
-    l.ville
-FROM personne as p,
-	 logement as l,
-     logement_personne as lp
-WHERE l.idLogement = lp.idLogement and lp.idPersonne = p.idPersonne;
+
+SELECT p.idPersonne, p.prenom, l.ville FROM
+	personne AS p,
+	logement AS l,
+	logement_personne AS lp
+WHERE l.idLogement = lp.idLogement AND lp.idPersonne = p.idPersonne;
 
 #3.20
+
 SELECT COUNT(*) FROM logement WHERE ville LIKE 'hugo';
 
+
+##4
+
 #4.1
+
 create user 'afpa' identified by 'passwordAfpa';
 create user 'cda314' identified by 'passwordCda314';
 
 #4.2
+
 grant select, insert on immobilier.personne to 'cda314';
 grant select, insert on immobilier.logement to 'cda314';
 
 #4.3
+
 grant delete on immobilier.logement to 'afpa';
 grant delete on immobilier.demande to 'afpa';
