@@ -257,10 +257,17 @@ INNER JOIN (SELECT idPersonne from demande LIMIT 3) as d on p.idPersonne = d.idP
 SELECT prenom, email from personne as p
 INNER JOIN (SELECT * from demande where ville like 'Paris') as d on p.idPersonne = d.idPersonne;
 
-#3.18 Si l’ensemble des logements étaient vendus ou loués demain, quel serait le bénéfice généré grâce aux frais d’agence et pour chaque agence (Alias : bénéfice, classement : par ordre croissant des gains ?????????????????????????
+#3.18 
 
-SELECT la.idAgence, SUM(frais) from logement_agence as la
-INNER JOIN (SELECT * from agence) as a on la.idAgence = a.idAgence;
+select a.nom,
+       b.frais
+from agence as a
+inner join
+(
+    select idAgence, sum(frais) as frais
+    from logement_agence
+    group by idAgence
+) as b on a.idAgence = b.idAgence;
 
 #3.19
 SELECT
