@@ -16,6 +16,7 @@ CREATE TABLE musicien (
     );
     
 CREATE TABLE programme (
+	id INT AUTO_INCREMENT PRIMARY KEY,
     date_prog DATE,
     Num_Rep INT(4) ZEROFILL,
     tarif INT,
@@ -45,45 +46,20 @@ INSERT INTO musicien (Num_Mus, Nom_Mus, Num_Rep) VALUES
     ('2021-02-28', '0005', '27'); 
 
 #1
-SELECT * from representation; 
+CALL AfficherTitreRepresentations();
 
 #2
-SELECT Titre_Rep from representation WHERE Lieu_Rep LIKE 'Théâtre JCC';
+CALL AfficherTitreRepresentationsDansTheathre();
 
 #3 
-SELECT DISTINCT
-	r.Num_Rep,
-    r.Titre_Rep,
-	m.Nom_Mus
-FROM
-	musicien AS m,
-    representation AS r
-WHERE
-    m.Num_Rep = r.Num_Rep;
-    
+CALL Afficher_musiciens_titre();
+
 #4
-SELECT
-	r.Titre_Rep,
-    r.Lieu_Rep,
-	p.tarif
-FROM
-	representation AS r,
-    programme AS p
-WHERE
-    r.Num_Rep = p.Num_Rep AND
-    p.date_prog LIKE '2021-02-28';
+CALL afficher_rerp_28fevrier();
     
 #5
-SELECT Num_Mus from musicien WHERE Num_Rep LIKE '0005';
+CALL count_musicien_num_rep(5);
 
 #6
-SELECT DISTINCT
-	r.Num_Rep,
-    r.Titre_Rep,
-	r.Lieu_Rep,
-    p.date_prog
-FROM
-	representation AS r,
-    programme AS p
-WHERE
-    r.Num_Rep = p.Num_Rep AND p.tarif <= '30';
+CALL get_titredate_price_less(35);
+

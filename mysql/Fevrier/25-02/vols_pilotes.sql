@@ -19,12 +19,14 @@ CREATE TABLE avions (
     nomAv VARCHAR(10),
     capacite INT,
     localisation VARCHAR(15)
-)
+);
 
 INSERT into avions (numAv, nomAv, capacite, localisation) values 
 ('00001', 'Alpha', '300', 'Paris'), 
 ('00002', 'Delta', '400', 'Milan'), 
-('00003', 'Beta', '350', 'Rome');
+('00003', 'Tea', '375', 'Rome'),
+('00004', 'Coffee', '350', 'Bordeaux'),
+('00005', 'Cappucino', '110', 'Barcelona');
 
 /* table vols */
 CREATE TABLE vols (
@@ -40,7 +42,7 @@ CREATE TABLE vols (
         REFERENCES pilotes (numPil),
     CONSTRAINT fk_numav FOREIGN KEY (numAv)
         REFERENCES avions (numAv)
-)
+);
 
 INSERT into vols (numVol, numPil, numAv, ville_dep, ville_ar, heure_dep, heure_ar) values 
 ('AF351', '00003', '00001', 'Paris', 'New York', '190000', '040000'), 
@@ -48,16 +50,10 @@ INSERT into vols (numVol, numPil, numAv, ville_dep, ville_ar, heure_dep, heure_a
 ('LH1792', '00001', '00003', 'Lyon', 'Tunis', '110000', '210000');
 
 /* Donnez toutes les informations sur les pilotes de la compagnie. */
-SELECT 
-    *
-FROM
-    pilotes
+SELECT * FROM pilotes;
 
 /* Quels sont les numéros des pilotes en service et les villes de départ de leurs vols ? */
-SELECT 
-    numPil, ville_dep
-FROM
-    vols
+SELECT  numPil, ville_dep FROM vols;
 
 /* Donnez la liste des avions dont la capacité est supérieure à 350 passagers. */
 SELECT * from avions WHERE capacite>350;
@@ -91,5 +87,36 @@ SELECT * from pilotes WHERE numPil not in (select numPil from vols);
 
 
 
+######################
+
+#inner join
+select * from avions
+	inner join vols
+	on avions.numAv = vols.numAv;
+
+#left join
+select * from avions
+	left join vols
+	on avions.numAv = vols.numAv;
+
+#right join
+select * from avions
+	right join vols
+	on avions.numAv = vols.numAv;
+    
+#cross join
+select * from avions
+	cross join vols
+	on avions.numAv = vols.numAv;
 
 
+select user from mysql.user;
+create user 'cda314@localhost' identified by 'test314';
+
+alter user 'cda314@localhost' identified by 'test1314';
+
+show grants for 'root';
+
+grant update on formation.avions to 'cda314@localhost';
+
+show grants for 'cda314@localhost';
