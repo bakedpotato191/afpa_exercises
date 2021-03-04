@@ -19,17 +19,21 @@ CREATE TABLE employes (
         REFERENCES departements (DNO)
 );
 
-INSERT INTO departements (DNOM, DIR, Ville) VALUES ('Commercial', 30, 'New York'), ('Production', 20, 'Houston'), ('Développement', 40, 'Boston');
+INSERT INTO departements (DNOM, DIR, Ville) VALUES 
+	('Commercial', 30, 'New York'), 
+    ('Production', 20, 'Houston'), 
+    ('Développement', 40, 'Boston');
     
+INSERT INTO employes (ENOM, PROF, DATEEMB, SAL, COMM, DNO) VALUES 
+	('Joe', 'Ingénieur', '1993-10-1', 4000, 3000, 3), 
+    ('Jack', 'Technicien', '1988-5-1', 3000, 2000, 2), 
+    ('Joe', 'Vendeur', '1993-9-2', 5000, 5000, 1),
+    ('Lucy', 'Ingénieur', '1980-3-1', 5000, 5000, 3);
+
 #1 - Faire le produit cartésien en Employés 
 #et Départements
 
-SELECT 
-	*
-FROM 
-	employes
-CROSS JOIN 
-	departements;
+SELECT * FROM employes CROSS JOIN departements;
 
 #2- Donnez les noms des employés et 
 #les noms de leur département
@@ -72,16 +76,13 @@ select ENO from employes where
 		select MIN(SAL) from employes where PROF = "Ingénieur"
     );
 
-SELECT SAL, ENOM from employes as emp where not exists
-    (select * from employes where emp.SAL <= employes.SAL 
-    AND employes.PROF = 'Ingenieur');
-    
 #7- Donnez les salaires et le nom des employés gagnant plus que 
 #tous les ingénieurs
 	select SAL, ENOM from employes 
     where SAL > (
 		select MAX(SAL) from employes where PROF = "Ingénieur"
     );
+    
 #8- Donnez les noms des employés et les noms de leur directeur.
 	select ENOM, DIR from employes
     inner join departements
