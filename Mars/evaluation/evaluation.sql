@@ -11,28 +11,28 @@ create table agence (
 
 create table logement (
 	idLogement int(5) zerofill auto_increment primary key,
-    type varchar(15),
+    type varchar(15), check (type in ('maison', 'appartement')),
     ville varchar(25),
     prix int,
     superficie int,
-    categorie varchar(10)
+    categorie varchar(10), check (categorie in ('location', 'vente'))
 );
 
 create table personne (
 	idPersonne int auto_increment primary key,
     nom varchar(20),
     prenom varchar(20),
-    email varchar(25)
+    email varchar(25) unique, check(email like '%@%.__' or email like '%@%.___')
 );
 
 create table demande (
 	idDemande int auto_increment primary key,
     idPersonne int,
-    type varchar(15),
+    type varchar(15), check (type in ('maison', 'appartement')),
     ville varchar(25),
     budget int,
     superficie int,
-    categorie varchar(10),
+    categorie varchar(10), check (categorie in ('location', 'vente')),
     FOREIGN KEY (idPersonne) references personne (idPersonne),
     FOREIGN KEY (type) references logement (type),
     FOREIGN KEY (ville) references logement (ville),
