@@ -3,14 +3,62 @@
 CREATE SCHEMA immobilier;
 use immobilier;
 
+create table agence (
+	idAgence int(6) zerofill auto_increment primary key,
+    nom varchar(25),
+    adresse TINYTEXT
+);
+
+create table logement (
+	idLogement int(5) zerofill auto_increment primary key,
+    type varchar(15),
+    ville varchar(25),
+    prix int,
+    superficie int,
+    categorie varchar(10)
+);
+
+create table personne (
+	idPersonne int auto_increment primary key,
+    nom varchar(20),
+    prenom varchar(20),
+    email varchar(25)
+);
+
+create table demande (
+	idDemande int auto_increment primary key,
+    idPersonne int,
+    type varchar(15),
+    ville varchar(25),
+    budget int,
+    superficie int,
+    categorie varchar(10),
+    FOREIGN KEY (idPersonne) references personne (idPersonne),
+    FOREIGN KEY (type) references logement (type),
+    FOREIGN KEY (ville) references logement (ville),
+    FOREIGN KEY (superficie) references logement (superficie),
+    FOREIGN KEY (categorie) references logement (categorie)
+    );
+    
+create table logement_agence (
+	idLogementAgence int auto_increment primary key,
+    idAgence int(6),
+    idLogement int(5),
+    frais int,
+    FOREIGN KEY (idAgence) references agence (idAgence),
+    FOREIGN KEY (idLogement) references logement (idLogement)
+);
+
+create table logement_personne (
+	idLogementPersonne int auto_increment primary key,
+    idPersonne int,
+    idLogement int(5),
+    FOREIGN KEY (idPersonne) references personne (idPersonne),
+    FOREIGN KEY (idLogement) references logement (idLogement)
+);
+
 ##2
 
-CALL create_table_agence();
-CALL create_table_logement();
-CALL create_table_personne();
-CALL create_table_demande();
-CALL create_table_logement_agence();
-CALL create_table_logement_personne();
 CALL insert_info_agence();
 CALL insert_info_logement();
 CALL insert_info_personne();
