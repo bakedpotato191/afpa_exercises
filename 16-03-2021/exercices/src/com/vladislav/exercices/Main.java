@@ -25,9 +25,8 @@ public class Main {
 
 
         // Exercice 2
-
-        Scanner myObj1 = new Scanner(System.in);
         int nombre;
+        Scanner myObj1 = new Scanner(System.in);
 
         do{
             System.out.println("Saisir un nombre positif");
@@ -36,20 +35,16 @@ public class Main {
         while(nombre <= 0);
 
         if (nombre == 1) {
-            System.out.println(nombre + " n'est pas prime");
+            System.out.println(nombre + "est un nombre composé");
             System.exit(0);
         } else {
-            int count = 1;
-            for (int i = 2; i <= Math.sqrt(nombre); i++) {
+            for (int i = 2; i < Math.sqrt(nombre); ++i) {
                 if (nombre % i == 0) {
-                    count = count + 1;
-                }
-                if (count >= 2) {
-                    System.out.println(nombre + " n'est pas prime");
+                    System.out.println(nombre + " est un nombre composé");
                     System.exit(0);
                 }
             }
-            System.out.println(nombre + " est prime");
+            System.out.println(nombre + " est un nombre premier");
         }
     }
 }
